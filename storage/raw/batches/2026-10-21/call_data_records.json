@@ -1,0 +1,902 @@
+[
+  {
+    "call_id": "CALL-20261021-00001",
+    "user_id": "USR-127",
+    "duration_seconds": 3112,
+    "connection_success": true,
+    "call_quality_score": 4.37,
+    "delivery_rate_percent": 91.64,
+    "timestamp": "2026-10-21T02:45:12Z"
+  },
+  {
+    "call_id": "CALL-20261021-00002",
+    "user_id": "USR-141",
+    "duration_seconds": 21,
+    "connection_success": false,
+    "call_quality_score": 1.21,
+    "delivery_rate_percent": 42.82,
+    "timestamp": "2026-10-21T14:56:25Z"
+  },
+  {
+    "call_id": "CALL-20261021-00003",
+    "user_id": "USR-134",
+    "duration_seconds": 1715,
+    "connection_success": true,
+    "call_quality_score": 2.3,
+    "delivery_rate_percent": 91.78,
+    "timestamp": "2026-10-21T06:03:38Z"
+  },
+  {
+    "call_id": "CALL-20261021-00004",
+    "user_id": "USR-105",
+    "duration_seconds": 1866,
+    "connection_success": true,
+    "call_quality_score": 4.64,
+    "delivery_rate_percent": 84.49,
+    "timestamp": "2026-10-21T03:06:45Z"
+  },
+  {
+    "call_id": "CALL-20261021-00005",
+    "user_id": "USR-143",
+    "duration_seconds": 2886,
+    "connection_success": true,
+    "call_quality_score": 2.82,
+    "delivery_rate_percent": 87.08,
+    "timestamp": "2026-10-21T00:29:27Z"
+  },
+  {
+    "call_id": "CALL-20261021-00006",
+    "user_id": "USR-108",
+    "duration_seconds": 1538,
+    "connection_success": true,
+    "call_quality_score": 3.2,
+    "delivery_rate_percent": 86.67,
+    "timestamp": "2026-10-21T21:45:41Z"
+  },
+  {
+    "call_id": "CALL-20261021-00007",
+    "user_id": "USR-123",
+    "duration_seconds": 2524,
+    "connection_success": true,
+    "call_quality_score": 2.53,
+    "delivery_rate_percent": 72.3,
+    "timestamp": "2026-10-21T23:58:58Z"
+  },
+  {
+    "call_id": "CALL-20261021-00008",
+    "user_id": "USR-139",
+    "duration_seconds": 479,
+    "connection_success": true,
+    "call_quality_score": 1.25,
+    "delivery_rate_percent": 96.5,
+    "timestamp": "2026-10-21T21:10:22Z"
+  },
+  {
+    "call_id": "CALL-20261021-00009",
+    "user_id": "USR-140",
+    "duration_seconds": 2523,
+    "connection_success": true,
+    "call_quality_score": 2.93,
+    "delivery_rate_percent": 87.12,
+    "timestamp": "2026-10-21T02:02:08Z"
+  },
+  {
+    "call_id": "CALL-20261021-00010",
+    "user_id": "USR-117",
+    "duration_seconds": 3419,
+    "connection_success": true,
+    "call_quality_score": 4.7,
+    "delivery_rate_percent": 98.08,
+    "timestamp": "2026-10-21T03:21:18Z"
+  },
+  {
+    "call_id": "CALL-20261021-00011",
+    "user_id": "USR-101",
+    "duration_seconds": 21,
+    "connection_success": false,
+    "call_quality_score": 1.27,
+    "delivery_rate_percent": 2.74,
+    "timestamp": "2026-10-21T21:11:32Z"
+  },
+  {
+    "call_id": "CALL-20261021-00012",
+    "user_id": "USR-117",
+    "duration_seconds": 3030,
+    "connection_success": true,
+    "call_quality_score": 4.24,
+    "delivery_rate_percent": 93.98,
+    "timestamp": "2026-10-21T00:14:24Z"
+  },
+  {
+    "call_id": "CALL-20261021-00013",
+    "user_id": "USR-104",
+    "duration_seconds": 570,
+    "connection_success": true,
+    "call_quality_score": 4.87,
+    "delivery_rate_percent": 89.77,
+    "timestamp": "2026-10-21T22:24:21Z"
+  },
+  {
+    "call_id": "CALL-20261021-00014",
+    "user_id": "USR-128",
+    "duration_seconds": 3165,
+    "connection_success": true,
+    "call_quality_score": 1.01,
+    "delivery_rate_percent": 93.71,
+    "timestamp": "2026-10-21T06:53:28Z"
+  },
+  {
+    "call_id": "CALL-20261021-00015",
+    "user_id": "USR-109",
+    "duration_seconds": 6,
+    "connection_success": false,
+    "call_quality_score": 0.83,
+    "delivery_rate_percent": 28.0,
+    "timestamp": "2026-10-21T01:46:25Z"
+  },
+  {
+    "call_id": "CALL-20261021-00016",
+    "user_id": "USR-130",
+    "duration_seconds": 17,
+    "connection_success": false,
+    "call_quality_score": 1.69,
+    "delivery_rate_percent": 13.4,
+    "timestamp": "2026-10-21T14:48:46Z"
+  },
+  {
+    "call_id": "CALL-20261021-00017",
+    "user_id": "USR-137",
+    "duration_seconds": 3,
+    "connection_success": false,
+    "call_quality_score": 1.0,
+    "delivery_rate_percent": 3.46,
+    "timestamp": "2026-10-21T03:56:35Z"
+  },
+  {
+    "call_id": "CALL-20261021-00018",
+    "user_id": "USR-139",
+    "duration_seconds": 555,
+    "connection_success": true,
+    "call_quality_score": 3.64,
+    "delivery_rate_percent": 80.08,
+    "timestamp": "2026-10-21T10:47:17Z"
+  },
+  {
+    "call_id": "CALL-20261021-00019",
+    "user_id": "USR-115",
+    "duration_seconds": 29,
+    "connection_success": false,
+    "call_quality_score": 0.84,
+    "delivery_rate_percent": 2.54,
+    "timestamp": "2026-10-21T23:05:54Z"
+  },
+  {
+    "call_id": "CALL-20261021-00020",
+    "user_id": "USR-115",
+    "duration_seconds": 8,
+    "connection_success": false,
+    "call_quality_score": 1.76,
+    "delivery_rate_percent": 18.16,
+    "timestamp": "2026-10-21T23:17:50Z"
+  },
+  {
+    "call_id": "CALL-20261021-00021",
+    "user_id": "USR-110",
+    "duration_seconds": 1397,
+    "connection_success": true,
+    "call_quality_score": 4.86,
+    "delivery_rate_percent": 73.95,
+    "timestamp": "2026-10-21T18:45:53Z"
+  },
+  {
+    "call_id": "CALL-20261021-00022",
+    "user_id": "USR-126",
+    "duration_seconds": 303,
+    "connection_success": true,
+    "call_quality_score": 4.14,
+    "delivery_rate_percent": 78.13,
+    "timestamp": "2026-10-21T14:25:08Z"
+  },
+  {
+    "call_id": "CALL-20261021-00023",
+    "user_id": "USR-105",
+    "duration_seconds": 1229,
+    "connection_success": true,
+    "call_quality_score": 2.54,
+    "delivery_rate_percent": 94.12,
+    "timestamp": "2026-10-21T04:34:49Z"
+  },
+  {
+    "call_id": "CALL-20261021-00024",
+    "user_id": "USR-136",
+    "duration_seconds": 2501,
+    "connection_success": true,
+    "call_quality_score": 3.23,
+    "delivery_rate_percent": 73.92,
+    "timestamp": "2026-10-21T23:02:57Z"
+  },
+  {
+    "call_id": "CALL-20261021-00025",
+    "user_id": "USR-131",
+    "duration_seconds": 14,
+    "connection_success": false,
+    "call_quality_score": 1.79,
+    "delivery_rate_percent": 25.44,
+    "timestamp": "2026-10-21T01:38:18Z"
+  },
+  {
+    "call_id": "CALL-20261021-00026",
+    "user_id": "USR-134",
+    "duration_seconds": 3216,
+    "connection_success": true,
+    "call_quality_score": 2.9,
+    "delivery_rate_percent": 93.27,
+    "timestamp": "2026-10-21T22:12:55Z"
+  },
+  {
+    "call_id": "CALL-20261021-00027",
+    "user_id": "USR-140",
+    "duration_seconds": 27,
+    "connection_success": false,
+    "call_quality_score": 2.0,
+    "delivery_rate_percent": 45.23,
+    "timestamp": "2026-10-21T08:15:09Z"
+  },
+  {
+    "call_id": "CALL-20261021-00028",
+    "user_id": "USR-133",
+    "duration_seconds": 1224,
+    "connection_success": true,
+    "call_quality_score": 2.36,
+    "delivery_rate_percent": 79.9,
+    "timestamp": "2026-10-21T15:51:49Z"
+  },
+  {
+    "call_id": "CALL-20261021-00029",
+    "user_id": "USR-142",
+    "duration_seconds": 106,
+    "connection_success": true,
+    "call_quality_score": 4.41,
+    "delivery_rate_percent": 96.7,
+    "timestamp": "2026-10-21T08:21:56Z"
+  },
+  {
+    "call_id": "CALL-20261021-00030",
+    "user_id": "USR-102",
+    "duration_seconds": 28,
+    "connection_success": false,
+    "call_quality_score": 0.56,
+    "delivery_rate_percent": 28.4,
+    "timestamp": "2026-10-21T02:40:32Z"
+  },
+  {
+    "call_id": "CALL-20261021-00031",
+    "user_id": "USR-110",
+    "duration_seconds": 515,
+    "connection_success": true,
+    "call_quality_score": 3.24,
+    "delivery_rate_percent": 90.17,
+    "timestamp": "2026-10-21T04:47:49Z"
+  },
+  {
+    "call_id": "CALL-20261021-00032",
+    "user_id": "USR-135",
+    "duration_seconds": 3,
+    "connection_success": false,
+    "call_quality_score": 0.67,
+    "delivery_rate_percent": 0.37,
+    "timestamp": "2026-10-21T23:27:57Z"
+  },
+  {
+    "call_id": "CALL-20261021-00033",
+    "user_id": "USR-115",
+    "duration_seconds": 2236,
+    "connection_success": true,
+    "call_quality_score": 1.31,
+    "delivery_rate_percent": 87.94,
+    "timestamp": "2026-10-21T13:44:28Z"
+  },
+  {
+    "call_id": "CALL-20261021-00034",
+    "user_id": "USR-120",
+    "duration_seconds": 15,
+    "connection_success": false,
+    "call_quality_score": 1.64,
+    "delivery_rate_percent": 12.87,
+    "timestamp": "2026-10-21T08:14:33Z"
+  },
+  {
+    "call_id": "CALL-20261021-00035",
+    "user_id": "USR-148",
+    "duration_seconds": 15,
+    "connection_success": false,
+    "call_quality_score": 1.55,
+    "delivery_rate_percent": 27.12,
+    "timestamp": "2026-10-21T06:41:10Z"
+  },
+  {
+    "call_id": "CALL-20261021-00036",
+    "user_id": "USR-108",
+    "duration_seconds": 641,
+    "connection_success": true,
+    "call_quality_score": 3.61,
+    "delivery_rate_percent": 89.08,
+    "timestamp": "2026-10-21T04:40:00Z"
+  },
+  {
+    "call_id": "CALL-20261021-00037",
+    "user_id": "USR-128",
+    "duration_seconds": 10,
+    "connection_success": false,
+    "call_quality_score": 1.94,
+    "delivery_rate_percent": 28.95,
+    "timestamp": "2026-10-21T07:17:48Z"
+  },
+  {
+    "call_id": "CALL-20261021-00038",
+    "user_id": "USR-116",
+    "duration_seconds": 423,
+    "connection_success": true,
+    "call_quality_score": 1.29,
+    "delivery_rate_percent": 87.34,
+    "timestamp": "2026-10-21T01:40:21Z"
+  },
+  {
+    "call_id": "CALL-20261021-00039",
+    "user_id": "USR-114",
+    "duration_seconds": 357,
+    "connection_success": true,
+    "call_quality_score": 4.12,
+    "delivery_rate_percent": 74.24,
+    "timestamp": "2026-10-21T00:29:20Z"
+  },
+  {
+    "call_id": "CALL-20261021-00040",
+    "user_id": "USR-145",
+    "duration_seconds": 476,
+    "connection_success": true,
+    "call_quality_score": 3.69,
+    "delivery_rate_percent": 92.36,
+    "timestamp": "2026-10-21T16:45:46Z"
+  },
+  {
+    "call_id": "CALL-20261021-00041",
+    "user_id": "USR-145",
+    "duration_seconds": 714,
+    "connection_success": true,
+    "call_quality_score": 3.52,
+    "delivery_rate_percent": 80.52,
+    "timestamp": "2026-10-21T02:15:18Z"
+  },
+  {
+    "call_id": "CALL-20261021-00042",
+    "user_id": "USR-114",
+    "duration_seconds": 1263,
+    "connection_success": true,
+    "call_quality_score": 4.33,
+    "delivery_rate_percent": 93.32,
+    "timestamp": "2026-10-21T04:03:43Z"
+  },
+  {
+    "call_id": "CALL-20261021-00043",
+    "user_id": "USR-123",
+    "duration_seconds": 626,
+    "connection_success": true,
+    "call_quality_score": 2.67,
+    "delivery_rate_percent": 89.23,
+    "timestamp": "2026-10-21T09:18:11Z"
+  },
+  {
+    "call_id": "CALL-20261021-00044",
+    "user_id": "USR-112",
+    "duration_seconds": 4,
+    "connection_success": false,
+    "call_quality_score": 0.68,
+    "delivery_rate_percent": 38.12,
+    "timestamp": "2026-10-21T10:19:22Z"
+  },
+  {
+    "call_id": "CALL-20261021-00045",
+    "user_id": "USR-123",
+    "duration_seconds": 1186,
+    "connection_success": true,
+    "call_quality_score": 2.9,
+    "delivery_rate_percent": 73.19,
+    "timestamp": "2026-10-21T07:41:13Z"
+  },
+  {
+    "call_id": "CALL-20261021-00046",
+    "user_id": "USR-121",
+    "duration_seconds": 221,
+    "connection_success": true,
+    "call_quality_score": 2.62,
+    "delivery_rate_percent": 74.59,
+    "timestamp": "2026-10-21T16:22:29Z"
+  },
+  {
+    "call_id": "CALL-20261021-00047",
+    "user_id": "USR-118",
+    "duration_seconds": 3176,
+    "connection_success": true,
+    "call_quality_score": 3.71,
+    "delivery_rate_percent": 84.93,
+    "timestamp": "2026-10-21T15:17:42Z"
+  },
+  {
+    "call_id": "CALL-20261021-00048",
+    "user_id": "USR-110",
+    "duration_seconds": 25,
+    "connection_success": false,
+    "call_quality_score": 0.68,
+    "delivery_rate_percent": 33.36,
+    "timestamp": "2026-10-21T01:15:50Z"
+  },
+  {
+    "call_id": "CALL-20261021-00049",
+    "user_id": "USR-121",
+    "duration_seconds": 2297,
+    "connection_success": true,
+    "call_quality_score": 3.56,
+    "delivery_rate_percent": 80.41,
+    "timestamp": "2026-10-21T01:08:17Z"
+  },
+  {
+    "call_id": "CALL-20261021-00050",
+    "user_id": "USR-116",
+    "duration_seconds": 2776,
+    "connection_success": true,
+    "call_quality_score": 4.89,
+    "delivery_rate_percent": 98.82,
+    "timestamp": "2026-10-21T11:16:20Z"
+  },
+  {
+    "call_id": "CALL-20261021-00051",
+    "user_id": "USR-137",
+    "duration_seconds": 0,
+    "connection_success": false,
+    "call_quality_score": 1.21,
+    "delivery_rate_percent": 0.94,
+    "timestamp": "2026-10-21T10:18:44Z"
+  },
+  {
+    "call_id": "CALL-20261021-00052",
+    "user_id": "USR-118",
+    "duration_seconds": 3289,
+    "connection_success": true,
+    "call_quality_score": 4.41,
+    "delivery_rate_percent": 81.34,
+    "timestamp": "2026-10-21T11:10:37Z"
+  },
+  {
+    "call_id": "CALL-20261021-00053",
+    "user_id": "USR-132",
+    "duration_seconds": 1,
+    "connection_success": false,
+    "call_quality_score": 1.09,
+    "delivery_rate_percent": 41.38,
+    "timestamp": "2026-10-21T19:49:08Z"
+  },
+  {
+    "call_id": "CALL-20261021-00054",
+    "user_id": "USR-128",
+    "duration_seconds": 3019,
+    "connection_success": true,
+    "call_quality_score": 1.17,
+    "delivery_rate_percent": 76.52,
+    "timestamp": "2026-10-21T15:38:56Z"
+  },
+  {
+    "call_id": "CALL-20261021-00055",
+    "user_id": "USR-137",
+    "duration_seconds": 1496,
+    "connection_success": true,
+    "call_quality_score": 3.87,
+    "delivery_rate_percent": 72.77,
+    "timestamp": "2026-10-21T18:11:22Z"
+  },
+  {
+    "call_id": "CALL-20261021-00056",
+    "user_id": "USR-114",
+    "duration_seconds": 1437,
+    "connection_success": true,
+    "call_quality_score": 3.8,
+    "delivery_rate_percent": 93.75,
+    "timestamp": "2026-10-21T05:28:52Z"
+  },
+  {
+    "call_id": "CALL-20261021-00057",
+    "user_id": "USR-103",
+    "duration_seconds": 868,
+    "connection_success": true,
+    "call_quality_score": 2.93,
+    "delivery_rate_percent": 98.7,
+    "timestamp": "2026-10-21T19:52:03Z"
+  },
+  {
+    "call_id": "CALL-20261021-00058",
+    "user_id": "USR-103",
+    "duration_seconds": 6,
+    "connection_success": false,
+    "call_quality_score": 1.89,
+    "delivery_rate_percent": 7.39,
+    "timestamp": "2026-10-21T13:18:51Z"
+  },
+  {
+    "call_id": "CALL-20261021-00059",
+    "user_id": "USR-143",
+    "duration_seconds": 548,
+    "connection_success": true,
+    "call_quality_score": 3.67,
+    "delivery_rate_percent": 72.19,
+    "timestamp": "2026-10-21T00:04:29Z"
+  },
+  {
+    "call_id": "CALL-20261021-00060",
+    "user_id": "USR-113",
+    "duration_seconds": 29,
+    "connection_success": false,
+    "call_quality_score": 1.01,
+    "delivery_rate_percent": 41.8,
+    "timestamp": "2026-10-21T03:13:35Z"
+  },
+  {
+    "call_id": "CALL-20261021-00061",
+    "user_id": "USR-125",
+    "duration_seconds": 3,
+    "connection_success": false,
+    "call_quality_score": 1.69,
+    "delivery_rate_percent": 27.7,
+    "timestamp": "2026-10-21T15:51:28Z"
+  },
+  {
+    "call_id": "CALL-20261021-00062",
+    "user_id": "USR-130",
+    "duration_seconds": 1199,
+    "connection_success": true,
+    "call_quality_score": 2.51,
+    "delivery_rate_percent": 85.37,
+    "timestamp": "2026-10-21T06:19:04Z"
+  },
+  {
+    "call_id": "CALL-20261021-00063",
+    "user_id": "USR-102",
+    "duration_seconds": 1026,
+    "connection_success": true,
+    "call_quality_score": 1.75,
+    "delivery_rate_percent": 77.7,
+    "timestamp": "2026-10-21T00:33:42Z"
+  },
+  {
+    "call_id": "CALL-20261021-00064",
+    "user_id": "USR-148",
+    "duration_seconds": 1250,
+    "connection_success": true,
+    "call_quality_score": 1.46,
+    "delivery_rate_percent": 90.34,
+    "timestamp": "2026-10-21T14:11:09Z"
+  },
+  {
+    "call_id": "CALL-20261021-00065",
+    "user_id": "USR-117",
+    "duration_seconds": 992,
+    "connection_success": true,
+    "call_quality_score": 3.41,
+    "delivery_rate_percent": 89.87,
+    "timestamp": "2026-10-21T09:43:31Z"
+  },
+  {
+    "call_id": "CALL-20261021-00066",
+    "user_id": "USR-119",
+    "duration_seconds": 18,
+    "connection_success": false,
+    "call_quality_score": 0.85,
+    "delivery_rate_percent": 2.53,
+    "timestamp": "2026-10-21T00:23:01Z"
+  },
+  {
+    "call_id": "CALL-20261021-00067",
+    "user_id": "USR-144",
+    "duration_seconds": 1236,
+    "connection_success": true,
+    "call_quality_score": 3.47,
+    "delivery_rate_percent": 95.14,
+    "timestamp": "2026-10-21T14:35:10Z"
+  },
+  {
+    "call_id": "CALL-20261021-00068",
+    "user_id": "USR-146",
+    "duration_seconds": 1390,
+    "connection_success": true,
+    "call_quality_score": 3.63,
+    "delivery_rate_percent": 84.13,
+    "timestamp": "2026-10-21T18:30:08Z"
+  },
+  {
+    "call_id": "CALL-20261021-00069",
+    "user_id": "USR-131",
+    "duration_seconds": 253,
+    "connection_success": true,
+    "call_quality_score": 3.33,
+    "delivery_rate_percent": 70.63,
+    "timestamp": "2026-10-21T09:49:37Z"
+  },
+  {
+    "call_id": "CALL-20261021-00070",
+    "user_id": "USR-137",
+    "duration_seconds": 648,
+    "connection_success": true,
+    "call_quality_score": 4.08,
+    "delivery_rate_percent": 90.92,
+    "timestamp": "2026-10-21T02:50:25Z"
+  },
+  {
+    "call_id": "CALL-20261021-00071",
+    "user_id": "USR-136",
+    "duration_seconds": 2510,
+    "connection_success": true,
+    "call_quality_score": 1.54,
+    "delivery_rate_percent": 72.47,
+    "timestamp": "2026-10-21T20:00:20Z"
+  },
+  {
+    "call_id": "CALL-20261021-00072",
+    "user_id": "USR-134",
+    "duration_seconds": 7,
+    "connection_success": false,
+    "call_quality_score": 1.53,
+    "delivery_rate_percent": 44.29,
+    "timestamp": "2026-10-21T15:14:49Z"
+  },
+  {
+    "call_id": "CALL-20261021-00073",
+    "user_id": "USR-142",
+    "duration_seconds": 2487,
+    "connection_success": true,
+    "call_quality_score": 3.11,
+    "delivery_rate_percent": 87.29,
+    "timestamp": "2026-10-21T06:24:07Z"
+  },
+  {
+    "call_id": "CALL-20261021-00074",
+    "user_id": "USR-134",
+    "duration_seconds": 2117,
+    "connection_success": true,
+    "call_quality_score": 2.1,
+    "delivery_rate_percent": 84.33,
+    "timestamp": "2026-10-21T11:11:10Z"
+  },
+  {
+    "call_id": "CALL-20261021-00075",
+    "user_id": "USR-111",
+    "duration_seconds": 1211,
+    "connection_success": true,
+    "call_quality_score": 1.81,
+    "delivery_rate_percent": 76.43,
+    "timestamp": "2026-10-21T22:55:31Z"
+  },
+  {
+    "call_id": "CALL-20261021-00076",
+    "user_id": "USR-129",
+    "duration_seconds": 1142,
+    "connection_success": true,
+    "call_quality_score": 2.67,
+    "delivery_rate_percent": 99.12,
+    "timestamp": "2026-10-21T15:16:06Z"
+  },
+  {
+    "call_id": "CALL-20261021-00077",
+    "user_id": "USR-124",
+    "duration_seconds": 2099,
+    "connection_success": true,
+    "call_quality_score": 3.85,
+    "delivery_rate_percent": 94.73,
+    "timestamp": "2026-10-21T06:28:14Z"
+  },
+  {
+    "call_id": "CALL-20261021-00078",
+    "user_id": "USR-145",
+    "duration_seconds": 13,
+    "connection_success": false,
+    "call_quality_score": 1.97,
+    "delivery_rate_percent": 12.98,
+    "timestamp": "2026-10-21T20:43:24Z"
+  },
+  {
+    "call_id": "CALL-20261021-00079",
+    "user_id": "USR-115",
+    "duration_seconds": 1069,
+    "connection_success": true,
+    "call_quality_score": 2.73,
+    "delivery_rate_percent": 88.35,
+    "timestamp": "2026-10-21T05:10:24Z"
+  },
+  {
+    "call_id": "CALL-20261021-00080",
+    "user_id": "USR-120",
+    "duration_seconds": 677,
+    "connection_success": true,
+    "call_quality_score": 2.32,
+    "delivery_rate_percent": 98.09,
+    "timestamp": "2026-10-21T05:09:50Z"
+  },
+  {
+    "call_id": "CALL-20261021-00081",
+    "user_id": "USR-140",
+    "duration_seconds": 1848,
+    "connection_success": true,
+    "call_quality_score": 4.73,
+    "delivery_rate_percent": 98.84,
+    "timestamp": "2026-10-21T16:58:23Z"
+  },
+  {
+    "call_id": "CALL-20261021-00082",
+    "user_id": "USR-134",
+    "duration_seconds": 1620,
+    "connection_success": true,
+    "call_quality_score": 3.26,
+    "delivery_rate_percent": 80.41,
+    "timestamp": "2026-10-21T04:35:16Z"
+  },
+  {
+    "call_id": "CALL-20261021-00083",
+    "user_id": "USR-122",
+    "duration_seconds": 477,
+    "connection_success": true,
+    "call_quality_score": 3.38,
+    "delivery_rate_percent": 81.75,
+    "timestamp": "2026-10-21T00:22:38Z"
+  },
+  {
+    "call_id": "CALL-20261021-00084",
+    "user_id": "USR-139",
+    "duration_seconds": 3505,
+    "connection_success": true,
+    "call_quality_score": 2.91,
+    "delivery_rate_percent": 86.15,
+    "timestamp": "2026-10-21T10:43:25Z"
+  },
+  {
+    "call_id": "CALL-20261021-00085",
+    "user_id": "USR-105",
+    "duration_seconds": 1248,
+    "connection_success": true,
+    "call_quality_score": 1.97,
+    "delivery_rate_percent": 91.2,
+    "timestamp": "2026-10-21T10:36:00Z"
+  },
+  {
+    "call_id": "CALL-20261021-00086",
+    "user_id": "USR-101",
+    "duration_seconds": 760,
+    "connection_success": true,
+    "call_quality_score": 4.93,
+    "delivery_rate_percent": 85.84,
+    "timestamp": "2026-10-21T20:44:06Z"
+  },
+  {
+    "call_id": "CALL-20261021-00087",
+    "user_id": "USR-144",
+    "duration_seconds": 2972,
+    "connection_success": true,
+    "call_quality_score": 2.42,
+    "delivery_rate_percent": 97.89,
+    "timestamp": "2026-10-21T16:31:29Z"
+  },
+  {
+    "call_id": "CALL-20261021-00088",
+    "user_id": "USR-124",
+    "duration_seconds": 422,
+    "connection_success": true,
+    "call_quality_score": 3.75,
+    "delivery_rate_percent": 91.36,
+    "timestamp": "2026-10-21T23:21:09Z"
+  },
+  {
+    "call_id": "CALL-20261021-00089",
+    "user_id": "USR-128",
+    "duration_seconds": 694,
+    "connection_success": true,
+    "call_quality_score": 3.0,
+    "delivery_rate_percent": 73.96,
+    "timestamp": "2026-10-21T12:42:55Z"
+  },
+  {
+    "call_id": "CALL-20261021-00090",
+    "user_id": "USR-131",
+    "duration_seconds": 1508,
+    "connection_success": true,
+    "call_quality_score": 2.39,
+    "delivery_rate_percent": 83.54,
+    "timestamp": "2026-10-21T13:00:45Z"
+  },
+  {
+    "call_id": "CALL-20261021-00091",
+    "user_id": "USR-125",
+    "duration_seconds": 2325,
+    "connection_success": true,
+    "call_quality_score": 1.96,
+    "delivery_rate_percent": 73.74,
+    "timestamp": "2026-10-21T04:27:19Z"
+  },
+  {
+    "call_id": "CALL-20261021-00092",
+    "user_id": "USR-116",
+    "duration_seconds": 1473,
+    "connection_success": true,
+    "call_quality_score": 1.4,
+    "delivery_rate_percent": 98.5,
+    "timestamp": "2026-10-21T23:57:37Z"
+  },
+  {
+    "call_id": "CALL-20261021-00093",
+    "user_id": "USR-121",
+    "duration_seconds": 3007,
+    "connection_success": true,
+    "call_quality_score": 3.58,
+    "delivery_rate_percent": 99.42,
+    "timestamp": "2026-10-21T06:48:08Z"
+  },
+  {
+    "call_id": "CALL-20261021-00094",
+    "user_id": "USR-144",
+    "duration_seconds": 2197,
+    "connection_success": true,
+    "call_quality_score": 2.0,
+    "delivery_rate_percent": 83.14,
+    "timestamp": "2026-10-21T02:17:20Z"
+  },
+  {
+    "call_id": "CALL-20261021-00095",
+    "user_id": "USR-124",
+    "duration_seconds": 514,
+    "connection_success": true,
+    "call_quality_score": 3.11,
+    "delivery_rate_percent": 72.33,
+    "timestamp": "2026-10-21T04:34:10Z"
+  },
+  {
+    "call_id": "CALL-20261021-00096",
+    "user_id": "USR-142",
+    "duration_seconds": 19,
+    "connection_success": false,
+    "call_quality_score": 0.56,
+    "delivery_rate_percent": 45.98,
+    "timestamp": "2026-10-21T03:58:49Z"
+  },
+  {
+    "call_id": "CALL-20261021-00097",
+    "user_id": "USR-147",
+    "duration_seconds": 3224,
+    "connection_success": true,
+    "call_quality_score": 1.1,
+    "delivery_rate_percent": 84.58,
+    "timestamp": "2026-10-21T05:52:19Z"
+  },
+  {
+    "call_id": "CALL-20261021-00098",
+    "user_id": "USR-122",
+    "duration_seconds": 415,
+    "connection_success": true,
+    "call_quality_score": 2.41,
+    "delivery_rate_percent": 85.4,
+    "timestamp": "2026-10-21T13:43:12Z"
+  },
+  {
+    "call_id": "CALL-20261021-00099",
+    "user_id": "USR-136",
+    "duration_seconds": 1221,
+    "connection_success": true,
+    "call_quality_score": 1.7,
+    "delivery_rate_percent": 88.99,
+    "timestamp": "2026-10-21T09:32:23Z"
+  },
+  {
+    "call_id": "CALL-20261021-00100",
+    "user_id": "USR-137",
+    "duration_seconds": 1841,
+    "connection_success": true,
+    "call_quality_score": 1.39,
+    "delivery_rate_percent": 73.39,
+    "timestamp": "2026-10-21T05:54:24Z"
+  }
+]
