@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Procédure de migration locale</title>
+<style>
+:root{
+  --bg:#f7f5f0; --paper:#ffffff; --ink:#1f2328; --muted:#5b6370; --line:#e3ded3;
+  --accent:#1f4e79; --accent-soft:#e8eff7; --code-bg:#f2efe8; --warn:#8a5a00; --warn-soft:#fff4dc;
+  --ok:#1e6b3a; --ok-soft:#e6f4ea; --risk:#9b2c2c; --risk-soft:#fbeaea;
+  --serif: "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans: "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  --mono: "Cascadia Code",Consolas,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181d; --paper:#1c2027; --ink:#e6e3dc; --muted:#a2a9b4; --line:#2e343d;
+    --accent:#8db8e3; --accent-soft:#1f2b38; --code-bg:#232830; --warn:#e5b964; --warn-soft:#2e2717;
+    --ok:#7fcf98; --ok-soft:#1a2b20; --risk:#ef9a9a; --risk-soft:#2f1e1e;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15181d; --paper:#1c2027; --ink:#e6e3dc; --muted:#a2a9b4; --line:#2e343d;
+  --accent:#8db8e3; --accent-soft:#1f2b38; --code-bg:#232830; --warn:#e5b964; --warn-soft:#2e2717;
+  --ok:#7fcf98; --ok-soft:#1a2b20; --risk:#ef9a9a; --risk-soft:#2f1e1e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.7}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:40px;padding:0 24px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 24px;font-family:var(--sans);font-size:14px}
+nav.toc .brand{font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:12px;color:var(--muted);margin-bottom:14px}
+nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+nav.toc li{margin:2px 0}
+nav.toc a{display:block;padding:5px 10px;border-left:2px solid var(--line);color:var(--muted);text-decoration:none}
+nav.toc a:hover,nav.toc a.active{color:var(--accent);border-left-color:var(--accent);background:var(--accent-soft)}
+nav.toc .sub a{padding-left:24px;font-size:13px}
+.toolbar{display:flex;gap:8px;margin-top:20px}
+.toolbar button{font-family:var(--sans);font-size:12px;padding:6px 10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:6px;cursor:pointer}
+main{padding:36px 0 80px;min-width:0}
+header.title{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:40px 44px;margin-bottom:28px}
+header.title .kicker{font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+header.title h1{font-size:34px;line-height:1.2;margin:10px 0 14px;font-weight:600}
+header.title .meta{font-family:var(--sans);font-size:13px;color:var(--muted)}
+.abstract{margin-top:22px;padding:18px 22px;background:var(--accent-soft);border-radius:8px;font-size:16px}
+.abstract strong{font-family:var(--sans);font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;color:var(--accent)}
+section{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:34px 44px;margin-bottom:24px}
+h2{font-size:25px;margin:0 0 16px;font-weight:600;line-height:1.3}
+h2 .num{font-family:var(--sans);color:var(--accent);margin-right:10px;font-weight:700}
+h3{font-size:19px;margin:28px 0 10px;font-weight:600}
+p{margin:0 0 14px}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.84em;background:var(--code-bg);padding:1px 5px;border-radius:4px}
+pre{font-family:var(--mono);font-size:13.5px;line-height:1.55;background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:16px 18px;overflow:auto;margin:10px 0 18px;position:relative}
+pre code{background:none;padding:0;font-size:inherit}
+.copy{position:absolute;top:8px;right:8px;font-family:var(--sans);font-size:11px;padding:3px 8px;border:1px solid var(--line);background:var(--paper);color:var(--muted);border-radius:5px;cursor:pointer}
+table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;margin:10px 0 20px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em;background:var(--code-bg)}
+.table-wrap{overflow-x:auto}
+.note{border-left:4px solid var(--accent);background:var(--accent-soft);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:16px}
+.note.warn{border-color:var(--warn);background:var(--warn-soft)}
+.note.risk{border-color:var(--risk);background:var(--risk-soft)}
+.note.ok{border-color:var(--ok);background:var(--ok-soft)}
+.note b.lbl{font-family:var(--sans);font-size:12px;text-transform:uppercase;letter-spacing:.07em;display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.steps>li{counter-increment:s;position:relative;padding:4px 0 14px 50px;border-left:2px solid var(--line);margin-left:16px}
+.steps>li:last-child{border-left-color:transparent}
+.steps>li::before{content:counter(s);position:absolute;left:-17px;top:0;width:32px;height:32px;border-radius:50%;background:var(--accent);color:var(--paper);font-family:var(--sans);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center}
+.steps>li strong.t{display:block;font-size:18px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;margin:14px 0 20px}
+.flow span{padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:var(--code-bg)}
+.flow i{color:var(--muted);font-style:normal}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0 20px}
+.kpi{border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:var(--sans)}
+.kpi .v{font-size:26px;font-weight:700;color:var(--accent)}
+.kpi .l{font-size:12px;color:var(--muted)}
+ul.check{list-style:none;padding:0}
+ul.check li{padding:6px 0 6px 32px;position:relative;border-bottom:1px dashed var(--line)}
+ul.check li::before{content:"";position:absolute;left:4px;top:11px;width:15px;height:15px;border:2px solid var(--accent);border-radius:3px}
+.ref{font-size:15px;color:var(--muted)}
+footer{font-family:var(--sans);font-size:12px;color:var(--muted);text-align:center;margin-top:30px}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;padding:0 16px;gap:0}
+  nav.toc{position:static;max-height:none;padding:20px 0 0}
+  header.title,section{padding:24px 20px}
+  header.title h1{font-size:27px}
+}
+@media print{
+  nav.toc,.copy,.toolbar{display:none}
+  .layout{display:block}
+  body{background:#fff;font-size:12pt}
+  section,header.title{border:none;padding:0 0 12pt;break-inside:auto}
+  pre{white-space:pre-wrap}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc" aria-label="Sommaire">
+  <div class="brand">Sommaire</div>
+  <ol>
+    <li><a href="#intro">1. Introduction</a></li>
+    <li><a href="#methode">2. Procédure générique</a></li>
+    <li><a href="#existant">3. Étude de l'existant</a></li>
+    <li><a href="#cible">4. Architecture cible</a></li>
+    <li><a href="#mise-en-oeuvre">5. Mise en œuvre</a></li>
+    <li class="sub"><a href="#e1">5.1 Ingestion</a></li>
+    <li class="sub"><a href="#e2">5.2 Projet dbt</a></li>
+    <li class="sub"><a href="#e3">5.3 Sources</a></li>
+    <li class="sub"><a href="#e4">5.4 Modèles Parquet</a></li>
+    <li class="sub"><a href="#e5">5.5 Traduction SQL</a></li>
+    <li class="sub"><a href="#e6">5.6 Tests</a></li>
+    <li class="sub"><a href="#e7">5.7 Machine learning</a></li>
+    <li class="sub"><a href="#e8">5.8 Dashboard</a></li>
+    <li><a href="#resultats">6. Résultats</a></li>
+    <li><a href="#limites">7. Limites</a></li>
+    <li><a href="#checklist">8. Liste de contrôle</a></li>
+    <li><a href="#annexe">Annexe : commandes</a></li>
+  </ol>
+  <div class="toolbar">
+    <button type="button" onclick="toggleTheme()">Thème clair / sombre</button>
+    <button type="button" onclick="window.print()">Imprimer</button>
+  </div>
+</nav>
+
+<main>
+<header class="title">
+  <div class="kicker">Note méthodologique</div>
+  <h1>Migration d'une plateforme analytique cloud vers une pile locale dbt + DuckDB</h1>
+  <div class="meta">Cas d'étude : projet <code>telecom-project-main</code> (Rebtel) · Réalisé les 11 et 12 octobre 2026 · Dossier cible : <code>Modernizing_Rebtel/rebtel_local/</code></div>
+  <div class="abstract">
+    <strong>Résumé</strong>
+    Ce document décrit la reproduction, sur un poste de travail, d'une chaîne de données conçue pour Google Cloud Platform (Pub/Sub, Cloud Storage, BigQuery). La démarche suit quatre temps : l'étude de l'existant, la définition d'une architecture cible locale, la mise en œuvre par couches (ingestion, transformation, apprentissage automatique, restitution) et la vérification. Le pipeline local reproduit les 13 modèles d'origine. Il passe 38 tests de qualité de données et alimente le modèle de détection de fraude ainsi que le tableau de bord Streamlit. La procédure est d'abord présentée de façon générique, pour pouvoir être réutilisée sur un autre cas d'usage.
+  </div>
+</header>
+
+<section id="intro">
+  <h2><span class="num">1</span>Introduction et objectifs</h2>
+  <p>Le projet d'origine est une plateforme d'analyse pour un opérateur qui propose à la fois des appels internationaux et des transferts d'argent. Il croise quatre domaines (appels, transferts, paiements, tickets de support) pour produire un classement du risque de fraude, un profil client unifié, des indicateurs de revenus et un suivi de la qualité réseau.</p>
+  <p>L'objectif de ce travail est double. Il s'agit d'abord de faire fonctionner cette chaîne <em>sans aucun service cloud</em>, avec des outils locaux et des répertoires qui jouent le rôle de stockage. Il s'agit ensuite d'en tirer une <em>procédure reproductible</em>, applicable à d'autres projets construits sur le même schéma.</p>
+  <p>Trois principes ont guidé le travail :</p>
+  <ul>
+    <li><strong>Fidélité.</strong> La logique métier est conservée à l'identique. Seule la syntaxe propre au moteur change.</li>
+    <li><strong>Traçabilité.</strong> Chaque écart avec l'original est documenté, y compris les défauts conservés volontairement.</li>
+    <li><strong>Vérifiabilité.</strong> Chaque étape se termine par une exécution et une mesure.</li>
+  </ul>
+</section>
+
+<section id="methode">
+  <h2><span class="num">2</span>Procédure générique en huit étapes</h2>
+  <p>La démarche ci-dessous ne dépend pas du domaine télécom. Elle s'applique à tout projet de type ELT (extraction, chargement, transformation) hébergé dans un entrepôt cloud et que l'on souhaite exécuter localement.</p>
+  <ol class="steps">
+    <li><strong class="t">Inventorier l'existant</strong>Lister les sources (format, volume, clés), les scripts, les services cloud utilisés et les modèles de transformation. Profiler les données brutes : nombre de lignes, clés distinctes, valeurs des colonnes catégorielles.</li>
+    <li><strong class="t">Repérer les écarts entre documentation et code</strong>Comparer ce que le README annonce avec ce que le dépôt contient réellement. Ne migrer que ce qui existe.</li>
+    <li><strong class="t">Faire la correspondance cloud vers local</strong>Associer chaque service à un équivalent local : file de messages et stockage objet deviennent des répertoires, l'entrepôt devient DuckDB, l'orchestration SQL devient un projet dbt.</li>
+    <li><strong class="t">Créer les zones de stockage</strong>Un répertoire par couche : <code>raw/</code> pour les fichiers tels quels, <code>staging/</code> pour les données nettoyées, <code>marts/</code> pour les agrégats métier.</li>
+    <li><strong class="t">Écrire l'ingestion</strong>Un script simple et idempotent qui dépose les fichiers sources dans <code>raw/</code>.</li>
+    <li><strong class="t">Construire le projet dbt</strong>Déclarer les sources, traduire chaque modèle SQL dans le dialecte DuckDB, remplacer les noms de tables en dur par <code>ref()</code> et <code>source()</code>, écrire chaque modèle en Parquet.</li>
+    <li><strong class="t">Ajouter des tests de données</strong>Unicité et non-nullité des clés, valeurs acceptées pour chaque catégorie calculée.</li>
+    <li><strong class="t">Rebrancher les consommateurs</strong>Modifier uniquement la couche d'accès aux données des scripts d'apprentissage et des tableaux de bord. Exécuter, mesurer, documenter.</li>
+  </ol>
+  <div class="note"><b class="lbl">Principe directeur</b>On modifie la couche d'accès aux données, jamais la logique métier. C'est ce qui permet de comparer le résultat local avec le résultat d'origine.</div>
+</section>
+
+<section id="existant">
+  <h2><span class="num">3</span>Étude de l'existant</h2>
+  <h3>3.1 Sources de données</h3>
+  <p>Les quatre sources sont synthétiques. Elles sont générées par <code>src/data_generator.py</code> et partagent le même ensemble de 48 identifiants utilisateur, ce qui garantit l'intégrité référentielle entre domaines.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Fichier</th><th>Format</th><th>Lignes</th><th>Contenu</th></tr></thead>
+    <tbody>
+      <tr><td><code>stream/call_data_records.json</code></td><td>JSON</td><td>2 500</td><td>Appels : durée, succès de connexion, score de qualité (MOS), taux de livraison</td></tr>
+      <tr><td><code>stream/money_transfers.json</code></td><td>JSON</td><td>1 500</td><td>Transferts : pays émetteur et receveur, montant en USD, indicateur de fraude</td></tr>
+      <tr><td><code>saas/zendesk_tickets.json</code></td><td>JSON</td><td>50</td><td>Tickets de support : catégorie, priorité, statut, satisfaction</td></tr>
+      <tr><td><code>batch/financial_payments.csv</code></td><td>CSV</td><td>1 500</td><td>Paiements : formule d'abonnement, montant, statut</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3.2 Chaîne de traitement d'origine</h3>
+  <div class="flow"><span>Zendesk</span><i>→</i><span>Airbyte (simulé)</span><i>→</i><span>Pub/Sub</span><i>→</i><span>Cloud Storage</span><i>→</i><span>BigQuery raw</span><i>→</i><span>SQL « dbt »</span><i>→</i><span>BigQuery marts</span><i>→</i><span>ML + Streamlit</span></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Étape</th><th>Script</th><th>Service GCP</th></tr></thead>
+    <tbody>
+      <tr><td>Ingestion Zendesk</td><td><code>airbyte_ingest.py</code></td><td>BigQuery <code>rebtel_raw_airbyte</code></td></tr>
+      <tr><td>Flux temps réel</td><td><code>pubsub_publisher.py</code>, <code>pubsub_to_gcs.py</code></td><td>Pub/Sub, Cloud Storage</td></tr>
+      <tr><td>Lot (batch)</td><td><code>gcs_landing_upload.py</code></td><td>Cloud Storage</td></tr>
+      <tr><td>Chargement brut</td><td><code>gcs_to_bigquery_load.py</code></td><td>BigQuery <code>rebtel_raw_stream</code>, <code>rebtel_raw_batch</code></td></tr>
+      <tr><td>Transformations</td><td><code>dbt_runner.py</code></td><td>BigQuery <code>rebtel_analytics</code></td></tr>
+      <tr><td>Apprentissage</td><td><code>ml_fraud_detection.py</code></td><td>Lecture BigQuery</td></tr>
+      <tr><td>Restitution</td><td><code>dashboard_output/app.py</code></td><td>Lecture BigQuery</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>3.3 Modèles de transformation</h3>
+  <p>Treize modèles répartis en trois couches : quatre modèles de <em>staging</em> (nettoyage, typage, catégories dérivées), quatre tables de <em>faits</em> agrégées par utilisateur, et cinq <em>marts</em> analytiques (prévention de la fraude, client 360, revenus, qualité réseau, corridors de transfert).</p>
+
+  <h3>3.4 Constats</h3>
+  <div class="note warn"><b class="lbl">Constat principal</b>Le dépôt ne contient pas de véritable projet dbt. <code>dbt_runner.py</code> est un script Python qui envoie des requêtes <code>CREATE OR REPLACE TABLE</code> à BigQuery dans un ordre écrit à la main. Il n'y a ni <code>ref()</code>, ni graphe de dépendances calculé, ni tests.</div>
+  <ul>
+    <li>Le README mentionne des vues <code>vw_*</code>, un script <code>looker_dashboard_creator.py</code> et un dossier <code>ml_outputs/</code>. Aucun de ces éléments n'est présent dans le dépôt. Ils n'ont donc pas été recréés.</li>
+    <li>La colonne <code>latest_subscription_plan</code> est calculée avec <code>MAX()</code>, c'est-à-dire l'ordre alphabétique, et non le plan le plus récent. Ce comportement a été conservé pour rester fidèle.</li>
+  </ul>
+</section>
+
+<section id="cible">
+  <h2><span class="num">4</span>Architecture cible locale</h2>
+  <h3>4.1 Correspondance des composants</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Rôle</th><th>Cloud (origine)</th><th>Local (cible)</th></tr></thead>
+    <tbody>
+      <tr><td>Messagerie et zone d'atterrissage</td><td>Pub/Sub, Cloud Storage</td><td>Répertoire <code>storage/raw/</code></td></tr>
+      <tr><td>Connecteur SaaS</td><td>Airbyte (simulé)</td><td>Script <code>scripts/ingest_raw.py</code></td></tr>
+      <tr><td>Entrepôt</td><td>BigQuery</td><td>DuckDB (fichier <code>warehouse.duckdb</code>)</td></tr>
+      <tr><td>Transformation</td><td>Script Python + SQL</td><td>dbt-core + dbt-duckdb</td></tr>
+      <tr><td>Stockage des couches</td><td>Datasets BigQuery</td><td>Fichiers Parquet dans <code>staging/</code> et <code>marts/</code></td></tr>
+      <tr><td>Authentification</td><td>gcloud, ADC</td><td>Aucune</td></tr>
+    </tbody>
+  </table></div>
+  <h3>4.2 Arborescence</h3>
+<pre><code>rebtel_local/
+├── requirements.txt             dépendances Python
+├── scripts/ingest_raw.py        ingestion locale
+├── storage/
+│   ├── raw/                     fichiers sources (JSON, CSV)
+│   ├── staging/                 modèles stg_* en Parquet
+│   ├── marts/                   modèles fct_* et mart_* en Parquet
+│   ├── ml_outputs/              modèle, scaler, graphiques
+│   └── warehouse.duckdb         base DuckDB
+├── rebtel_dbt/
+│   ├── dbt_project.yml
+│   ├── profiles.yml
+│   ├── macros/storage_path.sql
+│   └── models/ staging/  facts/  marts/
+├── ml/ml_fraud_detection.py
+└── dashboard/app.py</code></pre>
+  <p>Le choix de Parquet comme format de sortie permet à n'importe quel outil (pandas, DuckDB, Power BI, Spark) de lire les couches sans passer par la base. Le fichier DuckDB ne contient que des vues qui pointent vers ces fichiers.</p>
+</section>
+
+<section id="mise-en-oeuvre">
+  <h2><span class="num">5</span>Mise en œuvre pas à pas</h2>
+
+  <h3 id="e1">5.1 Ingestion vers la zone brute</h3>
+  <p>Le script <code>scripts/ingest_raw.py</code> copie les quatre fichiers de <code>telecom-project-main/data/</code> vers <code>storage/raw/</code>. Il remplace à lui seul le trajet Pub/Sub, Cloud Storage puis chargement BigQuery. Il est idempotent : le relancer produit le même état.</p>
+<pre><code>FILES = {
+    "stream/call_data_records.json": "call_data_records.json",
+    "stream/money_transfers.json":   "money_transfers.json",
+    "saas/zendesk_tickets.json":     "zendesk_tickets.json",
+    "batch/financial_payments.csv":  "financial_payments.csv",
+}
+for src, dst in FILES.items():
+    shutil.copy2(SOURCE / src, RAW / dst)</code></pre>
+
+  <h3 id="e2">5.2 Configuration du projet dbt</h3>
+  <p>Le profil pointe vers un fichier DuckDB local. Le projet définit une matérialisation par défaut <code>external</code> au format Parquet, fournie par l'adaptateur dbt-duckdb.</p>
+<pre><code># profiles.yml
+rebtel:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../storage/warehouse.duckdb
+      threads: 4
+
+# dbt_project.yml (extrait)
+vars:
+  storage_root: "../storage"
+models:
+  rebtel:
+    +materialized: external
+    +format: parquet</code></pre>
+
+  <h3 id="e3">5.3 Déclaration des sources</h3>
+  <p>DuckDB sait lire directement les fichiers JSON et CSV. Les sources dbt pointent donc vers les fichiers bruts, sans étape de chargement en table.</p>
+<pre><code>sources:
+  - name: raw
+    tables:
+      - name: raw_stream_cdrs
+        config:
+          external_location: "read_json_auto('../storage/raw/call_data_records.json')"
+      - name: raw_batch_payments
+        config:
+          external_location: "read_csv_auto('../storage/raw/financial_payments.csv', header = true)"</code></pre>
+
+  <h3 id="e4">5.4 Écriture de chaque modèle en Parquet</h3>
+  <p>Une macro calcule le chemin de sortie à partir de la couche et du nom du modèle. Chaque modèle l'appelle dans son bloc de configuration.</p>
+<pre><code>{% macro storage_path(layer) -%}
+{{ var('storage_root') }}/{{ layer }}/{{ model.name }}.parquet
+{%- endmacro %}
+
+-- en tête de chaque modèle
+{{ config(location=storage_path('staging')) }}</code></pre>
+  <p>Les modèles <code>stg_*</code> sont écrits dans <code>staging/</code>, les <code>fct_*</code> et <code>mart_*</code> dans <code>marts/</code>, afin de conserver trois zones de stockage.</p>
+
+  <h3 id="e5">5.5 Traduction du SQL BigQuery vers DuckDB</h3>
+  <p>La logique métier (seuils, catégories, scores, jointures) est reprise ligne à ligne. Seules les fonctions propres à BigQuery sont traduites.</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>BigQuery</th><th>DuckDB</th><th>Remarque</th></tr></thead>
+    <tbody>
+      <tr><td><code>COUNTIF(x)</code></td><td><code>count_if(x)</code></td><td>Équivalent direct</td></tr>
+      <tr><td><code>TIMESTAMP(x)</code></td><td><code>cast(x as timestamp)</code></td><td>Équivalent direct</td></tr>
+      <tr><td><code>TIMESTAMP_DIFF(b, a, HOUR)</code></td><td><code>floor(date_diff('second', a, b) / 3600)</code></td><td>Compte les heures pleines, comme BigQuery. <code>date_diff('hour')</code> compterait les changements d'heure.</td></tr>
+      <tr><td><code>CURRENT_TIMESTAMP()</code></td><td><code>current_timestamp</code></td><td>Équivalent direct</td></tr>
+      <tr><td><code>`projet.dataset.table`</code></td><td><code>{{ ref('table') }}</code></td><td>dbt calcule l'ordre d'exécution</td></tr>
+    </tbody>
+  </table></div>
+  <p>Le passage à <code>ref()</code> est l'apport méthodologique principal : l'ordre d'exécution codé à la main dans <code>dbt_runner.py</code> devient un graphe de dépendances calculé, ce qui autorise l'exécution parallèle et la documentation automatique du lignage.</p>
+
+  <h3 id="e6">5.6 Tests de qualité de données</h3>
+  <p>Trois fichiers <code>schema.yml</code> (un par couche) déclarent 38 tests. Ils couvrent l'unicité et la non-nullité des clés (<code>call_id</code>, <code>transfer_id</code>, <code>user_id</code> dans les faits, etc.) et les valeurs acceptées pour chaque catégorie calculée.</p>
+<pre><code>- name: fraud_risk_level
+  data_tests:
+    - accepted_values:
+        arguments:
+          values: [CRITICAL_RISK, HIGH_RISK_FRAUD, MEDIUM_RISK, LOW_RISK, SAFE]</code></pre>
+
+  <h3 id="e7">5.7 Rebranchement du modèle d'apprentissage</h3>
+  <p>Le script est copié dans <code>ml/</code>. Seule la lecture des données change : le client BigQuery est remplacé par une requête DuckDB sur le fichier Parquet. Les sorties sont écrites dans <code>storage/ml_outputs/</code>. Les trois modèles comparés (forêt aléatoire, gradient boosting, régression logistique), le découpage 70/30 et les métriques restent identiques.</p>
+<pre><code>MART_PATH = os.path.join(STORAGE, "marts", "mart_fraud_prevention.parquet")
+df = duckdb.sql(f"SELECT ... FROM read_parquet('{MART_PATH}')").df()</code></pre>
+
+  <h3 id="e8">5.8 Rebranchement du tableau de bord</h3>
+  <p>Le tableau de bord Streamlit est copié dans <code>dashboard/</code>. Trois modifications suffisent :</p>
+  <ol>
+    <li>Le client BigQuery et son authentification gcloud sont remplacés par une connexion DuckDB en mémoire, qui crée une vue par fichier Parquet de <code>storage/marts/</code>. La fonction d'accès conserve son nom, si bien que le reste du code (environ 1 700 lignes) n'est pas modifié.</li>
+    <li>Les noms de tables qualifiés <code>`projet.dataset.mart_x`</code> deviennent <code>mart_x</code>.</li>
+    <li>Les fichiers bruts sont lus dans <code>storage/raw/</code> et les libellés affichés mentionnent DuckDB.</li>
+  </ol>
+<pre><code>@st.cache_resource
+def get_duckdb_conn():
+    con = duckdb.connect()
+    for path in glob.glob(os.path.join(MARTS_DIR, "*.parquet")):
+        name = os.path.splitext(os.path.basename(path))[0]
+        con.execute(f"CREATE OR REPLACE VIEW {name} AS SELECT * FROM read_parquet('{path}')")
+    return con</code></pre>
+  <div class="note warn"><b class="lbl">Défaut corrigé</b>L'onglet ML de l'original utilisait <code>pd.cut</code> avec une borne finale égale au maximum de signaux de fraude plus un. Lorsque ce maximum est inférieur à 8, les bornes ne sont plus croissantes et l'onglet s'arrête sur une erreur. Avec ces données, le maximum vaut 6. La borne a été remplacée par <code>max(max_sig + 1, 9)</code>.</div>
+</section>
+
+<section id="resultats">
+  <h2><span class="num">6</span>Résultats et vérification</h2>
+  <div class="kpis">
+    <div class="kpi"><div class="v">13 / 13</div><div class="l">modèles dbt exécutés</div></div>
+    <div class="kpi"><div class="v">38 / 38</div><div class="l">tests dbt réussis</div></div>
+    <div class="kpi"><div class="v">7 / 7</div><div class="l">onglets du tableau de bord sans erreur</div></div>
+    <div class="kpi"><div class="v">≈ 1 s</div><div class="l">durée de <code>dbt run</code></div></div>
+  </div>
+  <h3>6.1 Volumétrie produite</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Couche</th><th>Modèle</th><th>Lignes</th></tr></thead>
+    <tbody>
+      <tr><td>Staging</td><td><code>stg_stream_cdrs</code> / <code>stg_stream_transfers</code> / <code>stg_airbyte_zendesk</code> / <code>stg_batch_payments</code></td><td>2 500 / 1 500 / 50 / 1 500</td></tr>
+      <tr><td>Faits</td><td>Les quatre <code>fct_*</code></td><td>48 chacun (un par utilisateur)</td></tr>
+      <tr><td>Marts</td><td><code>mart_fraud_prevention</code>, <code>mart_customer_360</code>, <code>mart_revenue_analytics</code></td><td>48 chacun</td></tr>
+      <tr><td>Marts</td><td><code>mart_corridor_analytics</code></td><td>132 corridors</td></tr>
+      <tr><td>Marts</td><td><code>mart_network_quality</code></td><td>1 ligne (agrégat global)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Répartition du risque de fraude : 33 utilisateurs <code>HIGH_RISK_FRAUD</code>, 11 <code>CRITICAL_RISK</code>, 4 <code>MEDIUM_RISK</code>.</p>
+  <h3>6.2 Apprentissage automatique</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Modèle</th><th>Exactitude</th><th>Précision</th><th>Rappel</th><th>F1</th><th>AUC</th></tr></thead>
+    <tbody>
+      <tr><td>Forêt aléatoire (retenu)</td><td>100,0 %</td><td>100,0 %</td><td>100,0 %</td><td>100,0 %</td><td>1,000</td></tr>
+      <tr><td>Gradient boosting</td><td>100,0 %</td><td>100,0 %</td><td>100,0 %</td><td>100,0 %</td><td>1,000</td></tr>
+      <tr><td>Régression logistique</td><td>93,3 %</td><td>100,0 %</td><td>92,9 %</td><td>96,3 %</td><td>1,000</td></tr>
+    </tbody>
+  </table></div>
+  <p>Variables les plus importantes pour la forêt aléatoire : <code>total_fraud_signals</code> (0,258), <code>fraud_transfers</code> (0,237), <code>fraud_rate_pct</code> (0,179), <code>avg_transfer_usd</code> (0,140), <code>very_large_transfers</code> (0,068).</p>
+</section>
+
+<section id="limites">
+  <h2><span class="num">7</span>Limites et points de vigilance</h2>
+  <div class="note risk"><b class="lbl">Fuite de la cible</b>Le score F1 de 100 % ne mesure pas une capacité de prédiction. La cible <code>is_fraud</code> est déduite de <code>fraud_risk_level</code>, lui-même calculé à partir de <code>fraud_transfers</code> et <code>fraud_tickets</code>. Or ces colonnes, ainsi que <code>total_fraud_signals</code> qui en est la somme, figurent parmi les variables explicatives. Le modèle retrouve donc une règle qui lui est fournie. S'ajoute un jeu de test de 15 utilisateurs seulement (30 % de 48). Ce défaut vient de l'original et a été conservé pour ne pas modifier la logique métier.</div>
+  <ul>
+    <li><strong>Données synthétiques.</strong> Les distributions sont uniformes et générées aléatoirement. Les résultats n'ont pas de valeur métier.</li>
+    <li><strong>Ingestion simplifiée.</strong> La copie de fichiers ne reproduit ni la latence ni le découpage en micro-lots d'un flux temps réel. Les colonnes techniques d'Airbyte (<code>_airbyte_ab_id</code>, <code>_airbyte_emitted_at</code>) ne sont pas recréées.</li>
+    <li><strong>Plan d'abonnement.</strong> <code>latest_subscription_plan</code> reste un maximum alphabétique, faute de date de paiement dans la source.</li>
+    <li><strong>Éléments non migrés.</strong> Les vues <code>vw_*</code> et l'intégration Looker décrites dans le README d'origine n'existent pas dans le dépôt.</li>
+    <li><strong>Versions.</strong> Le script ML a été exécuté avec succès sous Python 3.14 et sous Python 3.12. Travail réalisé avec Python 3.14, dbt-core 1.11.11, dbt-duckdb 1.10.1, DuckDB 1.5.6, scikit-learn 1.9.1, matplotlib 3.11.2, Streamlit 1.65.0.</li>
+  </ul>
+</section>
+
+<section id="checklist">
+  <h2><span class="num">8</span>Liste de contrôle pour un nouveau cas d'usage</h2>
+  <ul class="check">
+    <li>Profiler chaque source : lignes, clés distinctes, types, valeurs des catégories.</li>
+    <li>Comparer le README avec le code réel et noter les écarts.</li>
+    <li>Dresser la table de correspondance cloud vers local.</li>
+    <li>Écrire un <code>requirements.txt</code> et l'installer avec <code>python -m pip install -r requirements.txt</code>, après avoir vérifié l'interpréteur avec <code>sys.executable</code>.</li>
+    <li>Créer <code>storage/raw</code>, <code>storage/staging</code>, <code>storage/marts</code>.</li>
+    <li>Écrire un script d'ingestion idempotent vers <code>raw/</code>.</li>
+    <li>Initialiser le projet dbt avec un profil DuckDB et la matérialisation <code>external</code>.</li>
+    <li>Déclarer les sources avec <code>read_json_auto</code>, <code>read_csv_auto</code> ou <code>read_parquet</code>.</li>
+    <li>Traduire chaque modèle sans toucher à la logique, en remplaçant les noms en dur par <code>ref()</code> et <code>source()</code>.</li>
+    <li>Vérifier les fonctions de dates : leur sémantique diffère souvent d'un moteur à l'autre.</li>
+    <li>Ajouter des tests de clés et de valeurs acceptées, puis lancer <code>dbt run</code> et <code>dbt test</code>.</li>
+    <li>Comparer les volumétries avec celles de l'original.</li>
+    <li>Rebrancher les consommateurs (ML, tableaux de bord) en ne modifiant que la couche d'accès.</li>
+    <li>Contrôler l'absence de fuite entre variables explicatives et cible dans tout modèle d'apprentissage.</li>
+    <li>Documenter chaque écart, chaque correction et les versions utilisées.</li>
+  </ul>
+</section>
+
+<section id="annexe">
+  <h2><span class="num">A</span>Annexe : commandes d'exécution</h2>
+  <div class="note warn"><b class="lbl">Installer les dépendances dans le bon interpréteur</b>Le poste compte plusieurs installations de Python (3.14 et 3.12). Selon le terminal utilisé, la commande <code>python</code> ne désigne pas le même interpréteur. Un paquet installé dans l'un reste invisible pour l'autre, ce qui a produit l'erreur <code>ModuleNotFoundError: No module named 'sklearn'</code> lors d'une exécution depuis PowerShell. La parade consiste à toujours installer avec <code>python -m pip</code>, qui cible l'interpréteur qui exécutera ensuite les scripts, à partir d'un fichier <code>requirements.txt</code>.</div>
+  <p>Vérifier l'interpréteur utilisé :</p>
+<pre><code>python -c "import sys; print(sys.executable)"</code></pre>
+  <p>Depuis <code>rebtel_local/</code>, installer les dépendances puis lancer l'ingestion :</p>
+<pre><code>python -m pip install -r requirements.txt</code></pre>
+<pre><code>python scripts/ingest_raw.py</code></pre>
+  <p>Depuis <code>rebtel_local/rebtel_dbt/</code> :</p>
+<pre><code>dbt run --profiles-dir .</code></pre>
+<pre><code>dbt test --profiles-dir .</code></pre>
+  <p>De nouveau depuis <code>rebtel_local/</code> :</p>
+<pre><code>python ml/ml_fraud_detection.py</code></pre>
+<pre><code>python -m streamlit run dashboard/app.py</code></pre>
+  <p class="ref">Le tableau de bord est alors accessible à l'adresse <code>http://localhost:8501</code>. Les dépendances Python sont listées dans <code>rebtel_local/requirements.txt</code> : <code>dbt-duckdb</code>, <code>duckdb</code>, <code>pandas</code>, <code>numpy</code>, <code>pyarrow</code>, <code>scikit-learn</code>, <code>matplotlib</code>, <code>streamlit</code>, <code>plotly</code>.</p>
+</section>
+
+<footer>Procédure établie à partir des exécutions réalisées les 11 et 12 octobre 2026 dans <code>Modernizing_Rebtel/rebtel_local</code>.</footer>
+</main>
+</div>
+
+<script>
+function toggleTheme(){
+  var r=document.documentElement;
+  var dark=r.getAttribute('data-theme')==='dark' || (!r.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  r.setAttribute('data-theme', dark ? 'light' : 'dark');
+}
+document.querySelectorAll('pre').forEach(function(pre){
+  var b=document.createElement('button');
+  b.className='copy'; b.type='button'; b.textContent='Copier';
+  b.onclick=function(){
+    var txt=pre.querySelector('code').innerText;
+    (navigator.clipboard ? navigator.clipboard.writeText(txt) : Promise.reject()).then(function(){b.textContent='Copié';setTimeout(function(){b.textContent='Copier'},1500)}).catch(function(){});
+  };
+  pre.appendChild(b);
+});
+var links=[].slice.call(document.querySelectorAll('nav.toc a'));
+var targets=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+if('IntersectionObserver' in window){
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var i=targets.indexOf(e.target);
+        links.forEach(function(l){l.classList.remove('active')});
+        if(i>=0) links[i].classList.add('active');
+      }
+    });
+  },{rootMargin:'-20% 0px -70% 0px'});
+  targets.forEach(function(t){ if(t) obs.observe(t); });
+}
+</script>
+</body>
+</html>

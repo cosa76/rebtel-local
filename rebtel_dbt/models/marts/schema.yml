@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: mart_fraud_prevention
+    description: Classement du risque de fraude par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: fraud_risk_level
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [CRITICAL_RISK, HIGH_RISK_FRAUD, MEDIUM_RISK, LOW_RISK, SAFE]
+
+  - name: mart_customer_360
+    description: Profil client unifié avec score de santé, segment et risque de churn.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+      - name: customer_segment
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [VIP, HIGH_VALUE, ACTIVE, REGULAR, INACTIVE]
+      - name: churn_risk
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [HIGH_CHURN_RISK, MODERATE_CHURN_RISK, STABLE]
+
+  - name: mart_revenue_analytics
+    description: Revenus, unit economics et LTV estimée par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+
+  - name: mart_network_quality
+    description: KPI réseau globaux (une seule ligne OVERALL).
+    columns:
+      - name: dimension
+        data_tests: [unique, not_null]
+
+  - name: mart_corridor_analytics
+    description: Volumes et fraude par corridor de transfert.
+    columns:
+      - name: corridor
+        data_tests: [unique, not_null]
+      - name: corridor_risk
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [HIGH_RISK_CORRIDOR, MONITOR_CORRIDOR, SAFE_CORRIDOR]

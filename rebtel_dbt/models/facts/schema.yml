@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: fct_telecom_calls
+    description: Indicateurs d'appels par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+  - name: fct_financial_transfers
+    description: Indicateurs de transferts par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+  - name: fct_support_tickets
+    description: Indicateurs de tickets support par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]
+  - name: fct_payments
+    description: Indicateurs de paiements par utilisateur.
+    columns:
+      - name: user_id
+        data_tests: [unique, not_null]

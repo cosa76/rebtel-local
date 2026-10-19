@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_stream_cdrs
+    description: Appels (CDR) nettoyés, avec tranche de durée et niveau de qualité.
+    columns:
+      - name: call_id
+        data_tests: [unique, not_null]
+      - name: user_id
+        data_tests: [not_null]
+      - name: call_duration_bucket
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [no_connection, very_short, short, medium, long]
+      - name: quality_tier
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [excellent, good, fair, poor]
+
+  - name: stg_stream_transfers
+    description: Transferts d'argent nettoyés, avec corridor et taille de transfert.
+    columns:
+      - name: transfer_id
+        data_tests: [unique, not_null]
+      - name: user_id
+        data_tests: [not_null]
+      - name: transfer_size_tier
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [micro, small, medium, large, very_large]
+
+  - name: stg_airbyte_zendesk
+    description: Tickets Zendesk nettoyés, avec temps de résolution en heures.
+    columns:
+      - name: ticket_id
+        data_tests: [unique, not_null]
+      - name: user_id
+        data_tests: [not_null]
+
+  - name: stg_batch_payments
+    description: Paiements nettoyés, avec indicateur de succès.
+    columns:
+      - name: transaction_id
+        data_tests: [unique, not_null]
+      - name: user_id
+        data_tests: [not_null]
+      - name: is_payment_successful
+        data_tests: [not_null]

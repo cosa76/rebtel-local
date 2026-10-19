@@ -1,0 +1,17 @@
+name: rebtel
+version: "1.0.0"
+config-version: 2
+profile: rebtel
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  storage_root: "../storage"
+
+models:
+  rebtel:
+    +materialized: external
+    +format: parquet

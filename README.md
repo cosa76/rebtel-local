@@ -1,0 +1,167 @@
+# https://medium.com/@arhamsheikh2250/modernizing-rebtels-data-platform-a-gcp-dbt-and-machine-learning-case-study-5babb6c5a295
+
+# Rebtel en local : dbt + DuckDB
+
+Ce dossier reprend le pipeline de `telecom-project-main` sans aucun service cloud.
+BigQuery est remplacé par DuckDB. GCS, Pub/Sub et Airbyte sont remplacés par des dossiers locaux.
+
+## 1. Ce que contient l'existant (telecom-project-main)
+
+**Le but.** Une plateforme d'analyse pour un opérateur télécom qui fait aussi du transfert d'argent. Elle croise appels, transferts, paiements et tickets support pour sortir un score de fraude, un profil client 360, des revenus et la qualité réseau.
+
+**Les sources (dans `data/`).**
+
+| Fichier | Contenu | Lignes |
+|---|---|---|
+| `stream/call_data_records.json` | Appels (CDR) : durée, succès, score qualité MOS, taux de livraison | 2 500 |
+| `stream/money_transfers.json` | Transferts : pays émetteur et receveur, montant USD, flag fraude | 1 500 |
+| `saas/zendesk_tickets.json` | Tickets support : catégorie, priorité, statut, satisfaction | 50 |
+| `batch/financial_payments.csv` | Paiements : plan, montant, statut | 1 500 |
+
+Toutes les sources partagent les mêmes 48 `user_id`. Les données sont synthétiques, générées par `src/data_generator.py`.
+
+**Le cloud utilisé (projet GCP `telecom-project-504210`).**
+
+| Étape | Script | Service |
+|---|---|---|
+| Ingestion Zendesk | `src/airbyte_ingest.py` | Simule Airbyte, insère dans BigQuery `rebtel_raw_airbyte` |
+| Génération des données | `src/data_generator.py` | Lit les `user_id` dans BigQuery |
+| Streaming | `src/pubsub_publisher.py`, `src/pubsub_to_gcs.py` | Pub/Sub, puis dépôt en micro-lots dans GCS |
+| Batch | `src/gcs_landing_upload.py` | Upload du CSV dans le bucket GCS |
+| Chargement brut | `src/gcs_to_bigquery_load.py` | GCS vers BigQuery `rebtel_raw_stream` et `rebtel_raw_batch` |
+| Transformations | `src/dbt_runner.py` | SQL BigQuery vers `rebtel_analytics` |
+| ML | `src/ml_fraud_detection.py` | Random Forest scikit-learn sur `mart_fraud_prevention` |
+| BI | `dashboard_output/app.py` | Streamlit + Plotly, lit les marts dans BigQuery |
+
+**Les modèles (13 au total, dans `src/dbt_runner.py`).**
+
+- Staging (4) : `stg_stream_cdrs`, `stg_stream_transfers`, `stg_airbyte_zendesk`, `stg_batch_payments`. Nettoyage, typage, catégories dérivées.
+- Facts (4) : `fct_telecom_calls`, `fct_financial_transfers`, `fct_support_tickets`, `fct_payments`. Agrégats par utilisateur.
+- Marts (5) : `mart_fraud_prevention`, `mart_customer_360`, `mart_revenue_analytics`, `mart_network_quality`, `mart_corridor_analytics`.
+
+**Ce qu'il faut savoir.**
+
+- Il n'y a pas de vrai projet dbt. `dbt_runner.py` est un script Python qui envoie des `CREATE OR REPLACE TABLE` à BigQuery dans un ordre codé en dur. Pas de `ref()`, pas de tests.
+- Le README annonce des vues `vw_*`, un script `looker_dashboard_creator.py` et un dossier `ml_outputs/`. Rien de tout ça n'est dans le dépôt. Je ne les ai donc pas recréés.
+- `latest_subscription_plan` prend le `MAX` alphabétique du plan, pas le plus récent. J'ai gardé ce comportement tel quel.
+
+## 2. Le nouveau projet
+
+![Architecture locale](docs/architecture_rebtel_local.png)
+
+Le schéma existe aussi en SVG : `docs/architecture_rebtel_local.svg`.
+
+```
+rebtel_local/
+├── scripts/ingest_raw.py      # remplace Airbyte, Pub/Sub, GCS et le chargement BigQuery
+├── storage/
+│   ├── raw/                   # fichiers sources tels quels (JSON, CSV)
+│   ├── staging/               # sortie des modèles stg_* en Parquet
+│   ├── marts/                 # sortie des fct_* et mart_* en Parquet
+│   └── warehouse.duckdb       # base DuckDB (vues qui pointent vers les Parquet)
+└── rebtel_dbt/
+    ├── dbt_project.yml
+    ├── profiles.yml           # connexion DuckDB locale
+    ├── macros/storage_path.sql
+    └── models/
+        ├── staging/  (sources.yml, 4 modèles, schema.yml)
+        ├── facts/    (4 modèles, schema.yml)
+        └── marts/    (5 modèles, schema.yml)
+```
+
+## 3. Les étapes, une par une
+
+**Étape 1 : ingestion.** `scripts/ingest_raw.py` copie les 4 fichiers de `telecom-project-main/data/` vers `storage/raw/`. C'est l'équivalent local du trajet Pub/Sub, GCS puis BigQuery raw.
+
+**Étape 2 : déclarer les sources.** `models/staging/sources.yml` déclare les 4 fichiers bruts. DuckDB les lit directement avec `read_json_auto` et `read_csv_auto`. Pas besoin de les charger dans une table.
+
+**Étape 3 : écrire chaque modèle en Parquet.** Tous les modèles utilisent la matérialisation `external` de dbt-duckdb. Chaque modèle est écrit dans un fichier Parquet. La macro `storage_path('staging')` ou `storage_path('marts')` choisit le dossier. Les facts vont dans `marts/` car on a gardé trois dossiers.
+
+**Étape 4 : traduire le SQL BigQuery en DuckDB.** La logique métier est identique. Seule la syntaxe change :
+
+| BigQuery | DuckDB |
+|---|---|
+| `COUNTIF(x)` | `count_if(x)` |
+| `TIMESTAMP(x)` | `cast(x as timestamp)` |
+| `TIMESTAMP_DIFF(b, a, HOUR)` | `floor(date_diff('second', a, b) / 3600)` (heures pleines, même résultat) |
+| `CURRENT_TIMESTAMP()` | `current_timestamp` |
+| Noms de tables en dur | `ref()` et `source()` |
+
+Avec `ref()`, dbt calcule lui-même l'ordre d'exécution. Plus besoin de l'ordre codé en dur.
+
+**Étape 5 : ajouter des tests.** Les fichiers `schema.yml` ajoutent 38 tests : clés uniques et non nulles, et valeurs acceptées pour les catégories (risque fraude, segment, churn, corridor, tranches).
+
+## 4. Lancer le projet
+
+**Avant tout : installer les dépendances dans le bon Python.** Ta machine a plusieurs Python (3.14 dans `C:\Python314`, 3.12 dans `AppData\Local\Programs\Python\Python312`). Selon le terminal, `python` ne pointe pas vers le même. Un `pip install` fait dans l'un n'est pas visible dans l'autre, d'où l'erreur `No module named 'sklearn'`. Pour éviter ça, installe toujours avec `python -m pip`, qui utilise le même Python que celui qui lancera les scripts. Pour vérifier lequel tu utilises : `python -c "import sys; print(sys.executable)"`.
+
+Depuis `rebtel_local/` :
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+```bash
+python scripts/ingest_raw.py
+```
+
+Puis depuis `rebtel_local/rebtel_dbt/` :
+
+```bash
+dbt run --profiles-dir .
+```
+
+```bash
+dbt test --profiles-dir .
+```
+
+## 5. Résultat vérifié le 11/10/2026
+
+- `dbt run` : 13 modèles sur 13 OK.
+- `dbt test` : 38 tests sur 38 OK.
+- Lignes : staging 2 500 appels, 1 500 transferts, 50 tickets, 1 500 paiements. Facts et marts par utilisateur : 48 lignes. `mart_corridor_analytics` : 132 corridors. `mart_network_quality` : 1 ligne.
+- Risque fraude : 33 HIGH_RISK_FRAUD, 11 CRITICAL_RISK, 4 MEDIUM_RISK.
+
+Versions utilisées : dbt-core 1.11.11, dbt-duckdb 1.10.1, Python 3.14.
+
+## 6. Le ML et le dashboard en local
+
+Deux dossiers en plus :
+
+```
+rebtel_local/
+├── ml/ml_fraud_detection.py   # copie du script ML, lit le Parquet
+├── dashboard/app.py           # copie du dashboard Streamlit, lit les Parquet
+└── storage/ml_outputs/        # modèle .pkl, scaler .pkl et graphiques .png
+```
+
+**Étape 6 : le script ML.** J'ai copié `src/ml_fraud_detection.py` dans `ml/`. Seul le chargement change : au lieu d'un client BigQuery, DuckDB lit `storage/marts/mart_fraud_prevention.parquet` avec `read_parquet`. Les sorties vont dans `storage/ml_outputs/`. L'entraînement (Random Forest, Gradient Boosting, Régression logistique) est identique.
+
+**Étape 7 : le dashboard.** J'ai copié `dashboard_output/app.py` dans `dashboard/`. Trois changements :
+
+1. Le client BigQuery et son authentification gcloud sont remplacés par une connexion DuckDB. Elle crée une vue par fichier Parquet de `storage/marts/`. La fonction `bq_query` garde son nom, donc le reste du code ne bouge pas.
+2. Les noms de tables `` `projet.dataset.mart_x` `` deviennent simplement `mart_x`.
+3. Les fichiers bruts sont lus dans `storage/raw/` au lieu de `telecom-project-main/data/`. Les textes affichés parlent de DuckDB au lieu de BigQuery.
+
+J'ai aussi corrigé un bug de l'original dans l'onglet ML : `pd.cut` plantait quand le nombre max de signaux de fraude était inférieur à 8. Ici le max est 6, donc l'onglet plantait.
+
+**Lancer.** Depuis `rebtel_local/` :
+
+```bash
+python ml/ml_fraud_detection.py
+```
+
+```bash
+python -m streamlit run dashboard/app.py
+```
+
+Le dashboard s'ouvre sur `http://localhost:8501`. Il faut avoir lancé `dbt run` avant.
+
+**Résultat vérifié le 12/10/2026.**
+
+- Dashboard : les 7 onglets s'affichent sans erreur, statut "DuckDB Live", 48 utilisateurs, 44 à risque élevé (33 + 11).
+- ML : Random Forest F1 100 %, Gradient Boosting F1 100 %, Régression logistique F1 96,3 %. Le Random Forest est sauvegardé.
+
+**Attention au score de 100 %.** La cible `is_fraud` vient de `fraud_risk_level`, qui est calculé à partir de `fraud_transfers` et `fraud_tickets`. Or ces colonnes sont aussi dans les features. Le modèle retrouve donc une règle qu'on lui donne déjà. C'est le même comportement que l'original, je ne l'ai pas changé. Le jeu de test ne fait que 15 utilisateurs.
+
+Versions ajoutées : scikit-learn 1.9.1, matplotlib 3.11.2, streamlit 1.65.0.

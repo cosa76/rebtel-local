@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1660 820" width="1660" height="820" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#4a5568"/>
+    </marker>
+    <marker id="arrd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a94a6"/>
+    </marker>
+    <style>
+      .t{font-size:15px;font-weight:700;fill:#1f2328}
+      .s{font-size:12.5px;fill:#4a5568}
+      .m{font-family:Consolas, monospace;font-size:12px;fill:#1f2328}
+      .h{font-size:11px;font-weight:700;letter-spacing:1.2px;fill:#6b7280}
+      .ln{stroke:#4a5568;stroke-width:1.8;fill:none}
+      .lnd{stroke:#8a94a6;stroke-width:1.5;fill:none;stroke-dasharray:5 4}
+    </style>
+  </defs>
+
+  <rect width="1660" height="820" fill="#fbfaf7"/>
+  <text x="30" y="44" font-size="24" font-weight="700" fill="#1f2328">Architecture locale du projet Rebtel</text>
+  <text x="30" y="70" class="s">rebtel_local/ · ingestion par fichiers, transformation dbt + DuckDB, stockage Parquet, ML scikit-learn et dashboard Streamlit. Aucun service cloud.</text>
+
+  <!-- Column headers -->
+  <text x="30"   y="118" class="h">1. SOURCES</text>
+  <text x="300"  y="118" class="h">2. INGESTION</text>
+  <text x="505"  y="118" class="h">3. ZONE BRUTE</text>
+  <text x="750"  y="118" class="h">4. TRANSFORMATION</text>
+  <text x="1135" y="118" class="h">5. STOCKAGE PARQUET</text>
+  <text x="1405" y="118" class="h">6. CONSOMMATION</text>
+
+  <!-- 1. Sources -->
+  <rect x="30" y="135" width="235" height="250" rx="10" fill="#eef1f5" stroke="#9aa5b4"/>
+  <text x="46" y="162" class="t">telecom-project-main/data</text>
+  <text x="46" y="182" class="s">Données synthétiques, 48 utilisateurs</text>
+  <g>
+    <rect x="46" y="198" width="203" height="40" rx="6" fill="#fff" stroke="#c9d1dc"/>
+    <text x="56" y="215" class="m">call_data_records.json</text><text x="56" y="231" class="s">2 500 appels</text>
+    <rect x="46" y="244" width="203" height="40" rx="6" fill="#fff" stroke="#c9d1dc"/>
+    <text x="56" y="261" class="m">money_transfers.json</text><text x="56" y="277" class="s">1 500 transferts</text>
+    <rect x="46" y="290" width="203" height="40" rx="6" fill="#fff" stroke="#c9d1dc"/>
+    <text x="56" y="307" class="m">zendesk_tickets.json</text><text x="56" y="323" class="s">50 tickets</text>
+    <rect x="46" y="336" width="203" height="40" rx="6" fill="#fff" stroke="#c9d1dc"/>
+    <text x="56" y="353" class="m">financial_payments.csv</text><text x="56" y="369" class="s">1 500 paiements</text>
+  </g>
+
+  <!-- 2. Ingestion -->
+  <rect x="300" y="215" width="170" height="90" rx="10" fill="#fff4dc" stroke="#d4a64a"/>
+  <text x="314" y="242" class="t">Script Python</text>
+  <text x="314" y="263" class="m">scripts/</text>
+  <text x="314" y="279" class="m">ingest_raw.py</text>
+  <text x="314" y="296" class="s">copie idempotente</text>
+  <path d="M265,260 L296,260" class="ln" marker-end="url(#arr)"/>
+
+  <!-- 3. Raw -->
+  <rect x="505" y="160" width="205" height="200" rx="10" fill="#e8eff7" stroke="#6f93ba"/>
+  <text x="520" y="187" class="t">storage/raw/</text>
+  <text x="520" y="207" class="s">fichiers tels quels</text>
+  <text x="520" y="235" class="m">call_data_records.json</text>
+  <text x="520" y="258" class="m">money_transfers.json</text>
+  <text x="520" y="281" class="m">zendesk_tickets.json</text>
+  <text x="520" y="304" class="m">financial_payments.csv</text>
+  <text x="520" y="336" class="s">JSON et CSV</text>
+  <path d="M470,260 L501,260" class="ln" marker-end="url(#arr)"/>
+
+  <!-- 4. dbt + DuckDB -->
+  <rect x="750" y="135" width="345" height="620" rx="12" fill="#f3eefa" stroke="#8b72b8"/>
+  <text x="766" y="163" class="t">dbt-core + dbt-duckdb</text>
+  <text x="766" y="183" class="m">rebtel_dbt/</text>
+
+  <rect x="766" y="198" width="313" height="56" rx="7" fill="#fff" stroke="#c5b6df"/>
+  <text x="778" y="219" class="t" font-size="13.5">Sources</text>
+  <text x="778" y="238" class="m">read_json_auto · read_csv_auto</text>
+  <path d="M710,240 L762,226" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="766" y="274" width="313" height="112" rx="7" fill="#fff" stroke="#c5b6df"/>
+  <text x="778" y="295" class="t" font-size="13.5">Staging · 4 modèles</text>
+  <text x="778" y="316" class="m">stg_stream_cdrs</text>
+  <text x="778" y="333" class="m">stg_stream_transfers</text>
+  <text x="778" y="350" class="m">stg_airbyte_zendesk</text>
+  <text x="778" y="367" class="m">stg_batch_payments</text>
+  <path d="M922,254 L922,270" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="766" y="406" width="313" height="112" rx="7" fill="#fff" stroke="#c5b6df"/>
+  <text x="778" y="427" class="t" font-size="13.5">Faits · 4 modèles (par utilisateur)</text>
+  <text x="778" y="448" class="m">fct_telecom_calls</text>
+  <text x="778" y="465" class="m">fct_financial_transfers</text>
+  <text x="778" y="482" class="m">fct_support_tickets</text>
+  <text x="778" y="499" class="m">fct_payments</text>
+  <path d="M922,386 L922,402" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="766" y="538" width="313" height="128" rx="7" fill="#fff" stroke="#c5b6df"/>
+  <text x="778" y="559" class="t" font-size="13.5">Marts · 5 modèles</text>
+  <text x="778" y="580" class="m">mart_fraud_prevention</text>
+  <text x="778" y="597" class="m">mart_customer_360</text>
+  <text x="778" y="614" class="m">mart_revenue_analytics</text>
+  <text x="778" y="631" class="m">mart_network_quality</text>
+  <text x="778" y="648" class="m">mart_corridor_analytics</text>
+  <path d="M922,518 L922,534" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="766" y="684" width="150" height="56" rx="7" fill="#e6f4ea" stroke="#6fae84"/>
+  <text x="778" y="706" class="t" font-size="13.5">dbt test</text>
+  <text x="778" y="726" class="s">38 tests réussis</text>
+  <rect x="929" y="684" width="150" height="56" rx="7" fill="#fff" stroke="#c5b6df"/>
+  <text x="941" y="706" class="t" font-size="13.5">DuckDB</text>
+  <text x="941" y="726" class="m">warehouse.duckdb</text>
+
+  <!-- 5. Parquet storage -->
+  <rect x="1135" y="250" width="225" height="140" rx="10" fill="#e8eff7" stroke="#6f93ba"/>
+  <text x="1150" y="277" class="t">storage/staging/</text>
+  <text x="1150" y="297" class="s">4 fichiers Parquet</text>
+  <text x="1150" y="322" class="m">stg_*.parquet</text>
+  <text x="1150" y="346" class="s">2 500 · 1 500 · 50 · 1 500</text>
+  <text x="1150" y="364" class="s">lignes</text>
+  <path d="M1079,330 L1131,320" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1135" y="440" width="225" height="180" rx="10" fill="#e8eff7" stroke="#6f93ba"/>
+  <text x="1150" y="467" class="t">storage/marts/</text>
+  <text x="1150" y="487" class="s">9 fichiers Parquet</text>
+  <text x="1150" y="512" class="m">fct_*.parquet</text>
+  <text x="1150" y="532" class="m">mart_*.parquet</text>
+  <text x="1150" y="560" class="s">48 lignes par utilisateur,</text>
+  <text x="1150" y="578" class="s">132 corridors,</text>
+  <text x="1150" y="596" class="s">1 ligne réseau</text>
+  <path d="M1079,462 L1131,480" class="ln" marker-end="url(#arr)"/>
+  <path d="M1079,602 L1131,580" class="ln" marker-end="url(#arr)"/>
+  <path d="M1004,684 C1004,660 1110,640 1140,622" class="lnd" marker-end="url(#arrd)"/>
+  <text x="1150" y="645" class="s" font-size="11">vues DuckDB sur les Parquet</text>
+
+  <!-- 6. Consumers -->
+  <rect x="1405" y="300" width="225" height="130" rx="10" fill="#fdecea" stroke="#c9736b"/>
+  <text x="1420" y="327" class="t">Machine learning</text>
+  <text x="1420" y="348" class="m">ml/ml_fraud_detection.py</text>
+  <text x="1420" y="372" class="s">scikit-learn : forêt aléatoire,</text>
+  <text x="1420" y="390" class="s">gradient boosting, rég. logistique</text>
+  <text x="1420" y="412" class="s">lit mart_fraud_prevention</text>
+  <path d="M1360,500 C1385,480 1385,420 1401,400" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1405" y="160" width="225" height="90" rx="10" fill="#e8eff7" stroke="#6f93ba"/>
+  <text x="1420" y="187" class="t">storage/ml_outputs/</text>
+  <text x="1420" y="208" class="m">fraud_detection_model.pkl</text>
+  <text x="1420" y="225" class="m">fraud_scaler.pkl</text>
+  <text x="1420" y="242" class="m">*.png (graphiques)</text>
+  <path d="M1517,300 L1517,254" class="ln" marker-end="url(#arr)"/>
+
+  <rect x="1405" y="490" width="225" height="130" rx="10" fill="#fdecea" stroke="#c9736b"/>
+  <text x="1420" y="517" class="t">Dashboard Streamlit</text>
+  <text x="1420" y="538" class="m">dashboard/app.py</text>
+  <text x="1420" y="562" class="s">7 onglets, lit les marts</text>
+  <text x="1420" y="580" class="s">via DuckDB</text>
+  <text x="1420" y="604" class="m">localhost:8501</text>
+  <path d="M1360,540 L1401,548" class="ln" marker-end="url(#arr)"/>
+  <path d="M607,360 L607,790 L1517,790 L1517,624" class="lnd" marker-end="url(#arrd)"/>
+  <text x="1135" y="780" class="s" font-size="11">fichiers bruts lus directement par le dashboard</text>
+
+  <!-- Legend -->
+  <g transform="translate(30,440)">
+    <text x="0" y="0" class="h">LÉGENDE</text>
+    <rect x="0" y="14" width="18" height="14" rx="3" fill="#e8eff7" stroke="#6f93ba"/><text x="26" y="26" class="s">Répertoire de stockage local</text>
+    <rect x="0" y="40" width="18" height="14" rx="3" fill="#fff4dc" stroke="#d4a64a"/><text x="26" y="52" class="s">Script d'ingestion</text>
+    <rect x="0" y="66" width="18" height="14" rx="3" fill="#f3eefa" stroke="#8b72b8"/><text x="26" y="78" class="s">Transformation dbt + DuckDB</text>
+    <rect x="0" y="92" width="18" height="14" rx="3" fill="#fdecea" stroke="#c9736b"/><text x="26" y="104" class="s">Consommateurs</text>
+    <path d="M0,126 L18,126" class="ln"/><text x="26" y="130" class="s">Flux principal</text>
+    <path d="M0,148 L18,148" class="lnd"/><text x="26" y="152" class="s">Lecture secondaire</text>
+  </g>
+
+  <g transform="translate(30,640)">
+    <text x="0" y="0" class="h">REMPLACE DANS L'ORIGINAL</text>
+    <text x="0" y="22" class="s">Pub/Sub et Cloud Storage → storage/raw/</text>
+    <text x="0" y="42" class="s">Airbyte (simulé) → ingest_raw.py</text>
+    <text x="0" y="62" class="s">BigQuery → DuckDB + Parquet</text>
+    <text x="0" y="82" class="s">dbt_runner.py → projet dbt avec ref()</text>
+  </g>
+</svg>

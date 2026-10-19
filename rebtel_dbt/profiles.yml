@@ -1,0 +1,7 @@
+rebtel:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ../storage/warehouse.duckdb
+      threads: 4

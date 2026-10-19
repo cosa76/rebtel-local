@@ -1,0 +1,21 @@
+# Sorties générées par dbt (recréées par dbt build)
+storage/staging/*.parquet
+storage/marts/*.parquet
+*.duckdb
+*.duckdb.wal
+
+# Sorties du script ML (recréées par ml/ml_fraud_detection.py)
+storage/ml_outputs/
+
+# Dossiers de travail dbt
+rebtel_dbt/target/
+rebtel_dbt/logs/
+rebtel_dbt/dbt_packages/
+rebtel_dbt/.user.yml
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

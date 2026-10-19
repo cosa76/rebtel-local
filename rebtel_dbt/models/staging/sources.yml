@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Fichiers bruts de storage/raw/. Le chargement initial vient de scripts/ingest_raw.py.
+      Les lots quotidiens de scripts/generate_daily_batch.py sont dans storage/raw/batches/<date>/.
+      Le motif ** lit le fichier initial et tous les lots.
+    tables:
+      - name: raw_stream_cdrs
+        config:
+          external_location: "read_json_auto('../storage/raw/**/call_data_records.json')"
+      - name: raw_stream_money_transfers
+        config:
+          external_location: "read_json_auto('../storage/raw/**/money_transfers.json')"
+      - name: raw_airbyte_zendesk_tickets
+        config:
+          external_location: "read_json_auto('../storage/raw/zendesk_tickets.json')"
+      - name: raw_batch_payments
+        config:
+          external_location: "read_csv_auto('../storage/raw/**/financial_payments.csv', header = true, union_by_name = true)"

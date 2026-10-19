@@ -1,0 +1,29 @@
+# Vérifie le projet dbt à chaque push et à chaque pull request.
+name: dbt CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  dbt-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rebtel_dbt
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Installer les dépendances
+        run: python -m pip install -r ../requirements.txt
+
+      - name: dbt deps
+        run: dbt deps --profiles-dir .
+
+      - name: dbt build (modèles + tests)
+        run: dbt build --profiles-dir .
