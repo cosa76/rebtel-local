@@ -165,3 +165,26 @@ Le dashboard s'ouvre sur `http://localhost:8501`. Il faut avoir lancé `dbt run`
 **Attention au score de 100 %.** La cible `is_fraud` vient de `fraud_risk_level`, qui est calculé à partir de `fraud_transfers` et `fraud_tickets`. Or ces colonnes sont aussi dans les features. Le modèle retrouve donc une règle qu'on lui donne déjà. C'est le même comportement que l'original, je ne l'ai pas changé. Le jeu de test ne fait que 15 utilisateurs.
 
 Versions ajoutées : scikit-learn 1.9.1, matplotlib 3.11.2, streamlit 1.65.0.
+
+## 7. Ajouter des données et CI/CD
+
+**Ajouter un lot en local.** Depuis `rebtel_local/` :
+
+```bash
+python scripts/add_new_data.py
+```
+
+Le script génère un lot dans `storage/raw/batches/<date>/` puis lance `dbt build`. La date est aujourd'hui, ou le jour qui suit le dernier lot si celui du jour existe déjà. Options : `--days 3` pour trois lots, `--date AAAA-MM-JJ` pour choisir la date, `--skip-dbt` pour ne pas lancer dbt.
+
+**Envoyer sur GitHub.**
+
+```bash
+git add storage/raw/batches
+git commit -m "Nouveaux lots"
+git push
+```
+
+**Les workflows** (onglet Actions du dépôt) :
+
+- `dbt CI` : `dbt deps` puis `dbt build` à chaque push, à chaque PR, ou avec "Run workflow".
+- `Lot quotidien` : tous les jours à 06:00 UTC, ou avec "Run workflow". Ajoute un lot, lance `dbt build` et commit le lot.

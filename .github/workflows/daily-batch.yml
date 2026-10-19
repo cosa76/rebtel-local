@@ -36,10 +36,11 @@ jobs:
         env:
           BATCH_DATE: ${{ inputs.date }}
         run: |
+          # Même logique qu'en local : si le lot du jour existe déjà, prend le jour suivant libre
           if [ -n "$BATCH_DATE" ]; then
-            python scripts/generate_daily_batch.py --date "$BATCH_DATE"
+            python scripts/add_new_data.py --skip-dbt --date "$BATCH_DATE"
           else
-            python scripts/generate_daily_batch.py
+            python scripts/add_new_data.py --skip-dbt
           fi
 
       - name: dbt deps
