@@ -1,0 +1,482 @@
+[
+  {
+    "transfer_id": "TRF-20261020-00001",
+    "user_id": "USR-116",
+    "sender_country": "US",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 1305.29,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00002",
+    "user_id": "USR-102",
+    "sender_country": "US",
+    "receiver_country": "IN",
+    "transfer_amount_usd": 1841.3,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00003",
+    "user_id": "USR-119",
+    "sender_country": "MX",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 744.18,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00004",
+    "user_id": "USR-112",
+    "sender_country": "BR",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 1273.14,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00005",
+    "user_id": "USR-137",
+    "sender_country": "TR",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 78.19,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00006",
+    "user_id": "USR-138",
+    "sender_country": "UK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 264.32,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00007",
+    "user_id": "USR-130",
+    "sender_country": "MX",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 1904.36,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00008",
+    "user_id": "USR-140",
+    "sender_country": "PH",
+    "receiver_country": "IN",
+    "transfer_amount_usd": 1458.2,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00009",
+    "user_id": "USR-125",
+    "sender_country": "DE",
+    "receiver_country": "MX",
+    "transfer_amount_usd": 221.72,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00010",
+    "user_id": "USR-129",
+    "sender_country": "UK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 909.23,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00011",
+    "user_id": "USR-130",
+    "sender_country": "TR",
+    "receiver_country": "ZA",
+    "transfer_amount_usd": 1986.42,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00012",
+    "user_id": "USR-106",
+    "sender_country": "PK",
+    "receiver_country": "US",
+    "transfer_amount_usd": 489.66,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00013",
+    "user_id": "USR-139",
+    "sender_country": "MX",
+    "receiver_country": "BR",
+    "transfer_amount_usd": 1860.73,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00014",
+    "user_id": "USR-143",
+    "sender_country": "ZA",
+    "receiver_country": "MX",
+    "transfer_amount_usd": 895.24,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00015",
+    "user_id": "USR-107",
+    "sender_country": "US",
+    "receiver_country": "MX",
+    "transfer_amount_usd": 1925.03,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00016",
+    "user_id": "USR-101",
+    "sender_country": "IN",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 1762.55,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00017",
+    "user_id": "USR-124",
+    "sender_country": "ZA",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 1598.69,
+    "is_fraud_flag": true
+  },
+  {
+    "transfer_id": "TRF-20261020-00018",
+    "user_id": "USR-124",
+    "sender_country": "SE",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 145.95,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00019",
+    "user_id": "USR-108",
+    "sender_country": "MX",
+    "receiver_country": "ZA",
+    "transfer_amount_usd": 26.45,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00020",
+    "user_id": "USR-130",
+    "sender_country": "BR",
+    "receiver_country": "US",
+    "transfer_amount_usd": 619.74,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00021",
+    "user_id": "USR-141",
+    "sender_country": "PH",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 1986.36,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00022",
+    "user_id": "USR-121",
+    "sender_country": "PH",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 206.84,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00023",
+    "user_id": "USR-110",
+    "sender_country": "SE",
+    "receiver_country": "MX",
+    "transfer_amount_usd": 609.16,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00024",
+    "user_id": "USR-126",
+    "sender_country": "NG",
+    "receiver_country": "US",
+    "transfer_amount_usd": 1556.0,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00025",
+    "user_id": "USR-128",
+    "sender_country": "DE",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 774.07,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00026",
+    "user_id": "USR-104",
+    "sender_country": "NG",
+    "receiver_country": "US",
+    "transfer_amount_usd": 829.0,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00027",
+    "user_id": "USR-104",
+    "sender_country": "UK",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 661.03,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00028",
+    "user_id": "USR-113",
+    "sender_country": "MX",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 837.36,
+    "is_fraud_flag": true
+  },
+  {
+    "transfer_id": "TRF-20261020-00029",
+    "user_id": "USR-107",
+    "sender_country": "US",
+    "receiver_country": "SE",
+    "transfer_amount_usd": 740.71,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00030",
+    "user_id": "USR-123",
+    "sender_country": "US",
+    "receiver_country": "BR",
+    "transfer_amount_usd": 1018.66,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00031",
+    "user_id": "USR-140",
+    "sender_country": "ZA",
+    "receiver_country": "US",
+    "transfer_amount_usd": 675.49,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00032",
+    "user_id": "USR-133",
+    "sender_country": "BR",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 208.75,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00033",
+    "user_id": "USR-103",
+    "sender_country": "UK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 1300.16,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00034",
+    "user_id": "USR-120",
+    "sender_country": "ZA",
+    "receiver_country": "UK",
+    "transfer_amount_usd": 478.4,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00035",
+    "user_id": "USR-145",
+    "sender_country": "UK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 970.1,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00036",
+    "user_id": "USR-128",
+    "sender_country": "ZA",
+    "receiver_country": "SE",
+    "transfer_amount_usd": 1497.98,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00037",
+    "user_id": "USR-133",
+    "sender_country": "TR",
+    "receiver_country": "DE",
+    "transfer_amount_usd": 394.12,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00038",
+    "user_id": "USR-101",
+    "sender_country": "UK",
+    "receiver_country": "BR",
+    "transfer_amount_usd": 339.74,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00039",
+    "user_id": "USR-139",
+    "sender_country": "SE",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 95.12,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00040",
+    "user_id": "USR-112",
+    "sender_country": "ZA",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 804.98,
+    "is_fraud_flag": true
+  },
+  {
+    "transfer_id": "TRF-20261020-00041",
+    "user_id": "USR-113",
+    "sender_country": "ZA",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 1012.73,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00042",
+    "user_id": "USR-108",
+    "sender_country": "US",
+    "receiver_country": "DE",
+    "transfer_amount_usd": 1231.48,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00043",
+    "user_id": "USR-106",
+    "sender_country": "TR",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 1431.96,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00044",
+    "user_id": "USR-123",
+    "sender_country": "SE",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 1823.96,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00045",
+    "user_id": "USR-134",
+    "sender_country": "BR",
+    "receiver_country": "ZA",
+    "transfer_amount_usd": 1351.99,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00046",
+    "user_id": "USR-112",
+    "sender_country": "DE",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 540.28,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00047",
+    "user_id": "USR-131",
+    "sender_country": "ZA",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 806.04,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00048",
+    "user_id": "USR-115",
+    "sender_country": "PK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 537.27,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00049",
+    "user_id": "USR-128",
+    "sender_country": "PK",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 1524.62,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00050",
+    "user_id": "USR-102",
+    "sender_country": "TR",
+    "receiver_country": "US",
+    "transfer_amount_usd": 1236.67,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00051",
+    "user_id": "USR-122",
+    "sender_country": "UK",
+    "receiver_country": "IN",
+    "transfer_amount_usd": 1708.45,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00052",
+    "user_id": "USR-113",
+    "sender_country": "PK",
+    "receiver_country": "TR",
+    "transfer_amount_usd": 1418.19,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00053",
+    "user_id": "USR-140",
+    "sender_country": "PK",
+    "receiver_country": "ZA",
+    "transfer_amount_usd": 155.33,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00054",
+    "user_id": "USR-130",
+    "sender_country": "TR",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 1448.25,
+    "is_fraud_flag": true
+  },
+  {
+    "transfer_id": "TRF-20261020-00055",
+    "user_id": "USR-104",
+    "sender_country": "PH",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 419.08,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00056",
+    "user_id": "USR-147",
+    "sender_country": "IN",
+    "receiver_country": "SE",
+    "transfer_amount_usd": 1390.72,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00057",
+    "user_id": "USR-138",
+    "sender_country": "PH",
+    "receiver_country": "PK",
+    "transfer_amount_usd": 1596.05,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00058",
+    "user_id": "USR-121",
+    "sender_country": "UK",
+    "receiver_country": "NG",
+    "transfer_amount_usd": 341.97,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00059",
+    "user_id": "USR-138",
+    "sender_country": "SE",
+    "receiver_country": "IN",
+    "transfer_amount_usd": 1109.97,
+    "is_fraud_flag": false
+  },
+  {
+    "transfer_id": "TRF-20261020-00060",
+    "user_id": "USR-123",
+    "sender_country": "PK",
+    "receiver_country": "PH",
+    "transfer_amount_usd": 906.44,
+    "is_fraud_flag": false
+  }
+]
